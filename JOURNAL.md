@@ -13,3 +13,10 @@
   RMSE du modèle « prédire 0 » ≈ 6 803 sur le train.
 - Roadmap en 9 phases. Les CSV restent dans `data/raw/`, hors git.
   L'enchaînement automatique est en pause : une phase par prompt.
+
+## 2026-11-16 — Phase 1 : problème dans le README
+
+- README en anglais : prime pure incendie, usage chez Pacifica (tarification),
+  RMSE sur `CHARGE`, plancher « prédire 0 » ≈ 6 803 sur le train, quatre CSV
+  à déposer dans `data/raw/` (non versionnés).
+- Bandeau Role / Domain / Stack inchangé.

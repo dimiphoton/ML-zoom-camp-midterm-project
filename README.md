@@ -1,4 +1,4 @@
-# Project name
+# Fire pure premium on French farm contracts
 
 | | |
 |---|---|
@@ -8,43 +8,64 @@
 | **Level** | Intermediate |
 | **Status** | Draft |
 
-The Role · Domain · Stack line is filled from `brief/identite.md` at kickoff.
+## The problem
 
-## Objective
+A French farmer buys a multi-risk policy, the *multirisque agricole*, so a fire does not stop the farm. The cover includes the business, the farm buildings, the equipment stored there, and the financial protection around them. Pacifica manages the contract. Fire is a large share of its claims cost.
 
-Predict the fire pure premium of a French multi-risk farm insurance
-contract. The pure premium (`CHARGE`) is claim frequency times average
-claim cost times years insured. The model is chosen by RMSE on that
-charge. A frequency model and a severity model are trained separately,
-then multiplied.
+The number to predict is the fire pure premium: the claim cost expected for one contract over one exercise year, before commercial loadings. In the files, the observed cost on that row is `CHARGE`.
 
-## Data
+`CHARGE` = `FREQ` × `CM` × `ANNEE_ASSURANCE`
 
-Local challenge extracts in `data/raw/` (gitignored, not in this
-repository): 383,610 training rows and 95,852 test rows, 374 columns,
-nine anonymised exercise years. One row is one contract over one
-exercise year. Targets (`FREQ`, `CM`, `CHARGE`) are in the training
-output file only.
+| Column | Meaning |
+|---|---|
+| `FREQ` | Fire claim frequency: number of claims / years insured |
+| `CM` | Average cost of a fire claim: claim cost / number of claims |
+| `ANNEE_ASSURANCE` | Number of years the contract has been insured |
+| `CHARGE` | Fire claim cost on the row, equal to the product of the three columns |
+
+One row is one contract over one exercise year. The year, `AN_EXERC`, is anonymised into nine labels (`ANNEE1`–`ANNEE9`). The training table has 383,610 rows and 374 columns. The test table has 95,852 rows, the same feature columns, and no targets.
+
+## Who uses it
+
+Pacifica's pricing team uses a prediction of `CHARGE` as the fire pure premium of the farm multi-risk contract. The decision is which expected fire claim cost to attach to a contract-year. This repository is the ML Zoomcamp midterm written on that brief. The brief's reference is a Poisson GLM for frequency and a Tweedie GLM for average cost, both with a log link, scored once the two pieces are combined into `CHARGE`.
+
+## Metric
+
+Models are compared by the RMSE of `CHARGE`.
+
+On the training set, predicting `0` for every contract reaches an RMSE of about **6,803**. That floor is the score of "predict zero everywhere". It sits there because 99.25% of training contracts have no fire claim (`FREQ` = 0). The official test extract has no `CHARGE` column, so this floor is measured on the training targets.
+
+## Local data
+
+The four challenge CSV files stay on the machine that runs the project. `.gitignore` excludes `data/raw/*`. The repository only keeps `data/raw/.gitkeep`.
+
+Put the four files in `data/raw/`:
+
+| File | Contents |
+|---|---|
+| `train_input_Z61KlZo.csv` | Training features, 383,610 rows × 374 columns |
+| `train_output_DzPxaPY.csv` | Targets for those rows: `ID`, `FREQ`, `CM`, `ANNEE_ASSURANCE`, `CHARGE` |
+| `test_input_5qJzHrr.csv` | Test features, 95,852 rows × 374 columns, no targets |
+| `submission_csv_file_random_example_3fbDtrr.csv` | Example submission, one row per test id, same five columns as the training targets |
+
+Column labels are in `experiments/Descriptif_données.xlsx`. The challenge notebook `experiments/Exemple.ipynb` reads shorter names from the working directory (`train_input.csv`, `train_output.csv`, `test_input.csv`), which are not the filenames above.
 
 ## Result
 
-Not estimated yet. On the training set, predicting zero charge everywhere
-already sits at an RMSE of about 6,803, because 99.25% of contracts have
-no fire claim.
+No model is selected yet. The training-set floor is an RMSE of about 6,803, from predicting zero charge on every contract.
 
 ## Reproduce
 
-TBD: how to install dependencies and rerun the pipeline.
-
-```bash
-pip install -e .
-python -m mon_projet.cli --help
-```
+Training and the prediction service follow the later steps in `ROADMAP.md`. The data step for those steps is the table above: the four CSV files in `data/raw/`.
 
 ## Repo structure
 
-TBD, filled in as the project progresses — see also `ROADMAP.md` and
-`JOURNAL.md` (kept in French, like the rest of the codebase).
+- `data/raw/` — the four local CSV files, not versioned
+- `experiments/` — variable dictionary and example notebook
+- `src/mon_projet/` — Python package
+- `docs/decisions.md` — metric, split, and stack already chosen
+- `docs/presentations/` — slide sources
+- `ROADMAP.md`, `JOURNAL.md` — plan and development log, in French
 
 ## Presentations
 
