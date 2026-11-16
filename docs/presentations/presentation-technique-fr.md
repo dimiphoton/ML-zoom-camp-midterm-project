@@ -210,6 +210,8 @@ La météo de station manque sur environ 57 % des lignes.
 
 `python scripts/select_models.py`
 
+`python train.py`
+
 [Code](https://github.com/dimiphoton/ML-zoom-camp-midterm-project)
 
 ![w:148](https://img.shields.io/badge/Python-3.11-3776AB?logo=python&logoColor=white)

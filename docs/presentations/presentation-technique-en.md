@@ -210,6 +210,8 @@ Station weather is missing on about 57% of rows.
 
 `python scripts/select_models.py`
 
+`python train.py`
+
 [Code](https://github.com/dimiphoton/ML-zoom-camp-midterm-project)
 
 ![w:148](https://img.shields.io/badge/Python-3.11-3776AB?logo=python&logoColor=white)

@@ -67,6 +67,8 @@ Penalties and the tree settings are chosen on an inner 20% split of the learning
 
 Ridge is the one we keep. It beats the floor and the baseline. The trees also beat them, by less. On the inner split the trees scored better (6,764.82 against 6,769.35). That split is not where the choice is made. Depth 6 was the worst of the eight tree settings. XGBoost fits frequency with squared error, because `FREQ` is a rate, and fits cost with a Tweedie objective (power 1.5), the same variance family as the baseline.
 
+`train.py` refits this ridge on every training row, with those two penalties left as they are. The hold-out is not carved out again.
+
 ## What the training rows show
 
 99.25% of training contracts have no fire claim. Insured time is under one year on 54.7% of rows and exactly one year on 44.6%. The nine anonymised years stay in a narrow band of claim rates, while row counts run from about 27,000 to 78,000. There are 93 zones. Some surface, capital and weather columns repeat the same fact. The walkthrough is `notebooks/eda.ipynb`; the figures are in `docs/eda.md`.
@@ -93,7 +95,7 @@ python -m pip install -e .
 pytest
 ```
 
-`pip install -e .` reads `pyproject.toml` and installs pandas, numpy, scikit-learn, xgboost, flask, matplotlib, and pytest. Training and the prediction service follow the later steps in `ROADMAP.md`. The data step for those steps is the table above: the four CSV files in `data/raw/`.
+`pip install -e .` reads `pyproject.toml` and installs pandas, numpy, scikit-learn, xgboost, flask, matplotlib, and pytest. The prediction service follows the later steps in `ROADMAP.md`. The four CSV files in `data/raw/` are the data step for training and for that service.
 
 The comparison is recomputed from the two training files only. It takes about two minutes.
 
@@ -108,8 +110,22 @@ evaluate_selection_files(
 
 `python scripts/select_models.py` runs the same comparison and rewrites the two figures in `pictures/presentations/`.
 
+## Train the retained model
+
+`train.py` fits the ridge above on every training row and writes `models/ridge.pkl`. Frequency penalty 10,000, cost penalty 100. It calls the same `fit_ridge` path as the comparison: same columns, same rule that keeps negative costs out of the cost fit, same clip of a negative component to 0, then frequency × average cost × `ANNEE_ASSURANCE`. It does not retune. It does not open the official test file.
+
+From the repository root, with the virtual environment active:
+
+```powershell
+python train.py
+```
+
+The same command works in bash. It reads `data/raw/train_input_Z61KlZo.csv` and `data/raw/train_output_DzPxaPY.csv`.
+
 ## Repo structure
 
+- `train.py` — fits the retained ridge and writes `models/ridge.pkl`
+- `models/` — saved model, produced when you run `train.py`
 - `data/raw/` — the four local CSV files, not versioned
 - `experiments/` — variable dictionary and example notebook
 - `src/agri_fire/` — Python package
