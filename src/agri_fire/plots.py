@@ -40,6 +40,43 @@ _LABELS = {
     },
 }
 
+# Ordre affiché : du plus simple au plus flexible.
+_MODEL_ORDER = ("zero", "poisson_tweedie", "ridge", "xgboost")
+
+_GAP_LABELS = {
+    "fr": {
+        "axis": "Écart d'erreur avec « aucun sinistre »",
+        "zero": "Aucun sinistre",
+        "poisson_tweedie": "Formule d'assurance",
+        "ridge": "Droite ajustée",
+        "xgboost": "Arbres",
+    },
+    "en": {
+        "axis": "Gap versus “no fire”",
+        "zero": "No fire",
+        "poisson_tweedie": "Insurance formula",
+        "ridge": "Fitted line",
+        "xgboost": "Trees",
+    },
+}
+
+_CALIBRATION_LABELS = {
+    "fr": {
+        "predicted": "Charge prédite, moyenne de la tranche",
+        "observed": "Charge observée, moyenne de la tranche",
+        "poisson_tweedie": "Poisson–Tweedie",
+        "ridge": "Ridge",
+        "xgboost": "XGBoost",
+    },
+    "en": {
+        "predicted": "Predicted charge, bin average",
+        "observed": "Observed charge, bin average",
+        "poisson_tweedie": "Poisson–Tweedie",
+        "ridge": "Ridge",
+        "xgboost": "XGBoost",
+    },
+}
+
 
 def save_claim_share_by_year(
     summary: pd.DataFrame,
@@ -300,6 +337,148 @@ def save_weather_rank_strip(
     return _save(fig, path)
 
 
+def save_error_gap_chart(
+    scores: pd.DataFrame,
+    path: Path | str,
+    *,
+    language: str = "fr",
+    chosen: str,
+) -> Path:
+    """Écart de RMSE avec « prédire 0 ». Une barre à gauche est meilleure.
+
+    Le libellé reste en langage courant : le mot RMSE n'est pas sur l'axe.
+    Le nombre écrit à côté de chaque barre est l'erreur elle-même.
+
+    Parameters
+    ----------
+    scores : DataFrame
+        Colonnes ``key`` et ``rmse``. La ligne ``zero`` est l'origine.
+    path : Path or str
+        Fichier PNG.
+    language : str, optional
+        ``fr`` ou ``en``. Défaut : ``fr``.
+    chosen : str
+        Clé du candidat retenu. Sa barre est en or.
+
+    Returns
+    -------
+    Path
+        Chemin écrit.
+    """
+    _require_columns(scores, ["key", "rmse"])
+    labels = _chart_labels(_GAP_LABELS, language)
+    zero_rows = scores.loc[scores["key"].eq("zero"), "rmse"]
+    if zero_rows.empty:
+        raise ValueError("Le plancher « zero » manque dans les scores.")
+    origin = float(zero_rows.iloc[0])
+    order = [key for key in _MODEL_ORDER if key in set(scores["key"])]
+    gaps = []
+    names = []
+    absolutes = []
+    for key in order:
+        value = float(scores.loc[scores["key"].eq(key), "rmse"].iloc[0])
+        gaps.append(value - origin)
+        names.append(labels[key])
+        absolutes.append(value)
+
+    fig, ax = plt.subplots(figsize=(10.6, 5.0))
+    _style(ax)
+    positions = list(range(len(order)))
+    colors = [ACCENT if key == chosen else MUTED for key in order]
+    ax.barh(positions, gaps, color=colors, height=0.62, zorder=2)
+    ax.axvline(0, color=INK, linewidth=1.1, zorder=3)
+    ax.set_yticks(positions)
+    ax.set_yticklabels(names)
+    ax.invert_yaxis()
+    low = min(0.0, min(gaps))
+    high = max(0.0, max(gaps))
+    span = high - low
+    if span == 0:
+        span = 1.0
+    pad = span * 0.35
+    ax.set_xlim(low - pad, high + pad)
+    ax.set_xlabel(labels["axis"])
+    for position, gap, absolute in zip(positions, gaps, absolutes):
+        text = _format_number(absolute, language, decimals=0)
+        if gap >= 0:
+            ax.text(gap, position, "  " + text, va="center", ha="left", color=INK, fontsize=12)
+        else:
+            ax.text(gap, position, text + "  ", va="center", ha="right", color=INK, fontsize=12)
+    for tick, key in zip(ax.get_yticklabels(), order):
+        if key == chosen:
+            tick.set_color(ACCENT)
+    return _save(fig, path)
+
+
+def save_calibration_chart(
+    bins: pd.DataFrame,
+    path: Path | str,
+    *,
+    language: str = "fr",
+    chosen: str,
+) -> Path:
+    """Charge observée contre charge prévue, par tranche d'effectif égal.
+
+    Parameters
+    ----------
+    bins : DataFrame
+        Colonnes ``model``, ``mean_predicted``, ``mean_observed``.
+        Une ligne par tranche et par modèle.
+    path : Path or str
+        Fichier PNG.
+    language : str, optional
+        ``fr`` ou ``en``. Défaut : ``fr``.
+    chosen : str
+        Clé du modèle retenu. Son trait est en or.
+
+    Returns
+    -------
+    Path
+        Chemin écrit.
+    """
+    _require_columns(bins, ["model", "mean_predicted", "mean_observed"])
+    labels = _chart_labels(_CALIBRATION_LABELS, language)
+    fig, ax = plt.subplots(figsize=(10.6, 5.4))
+    _style(ax)
+    present = [key for key in ("poisson_tweedie", "ridge", "xgboost") if key in set(bins["model"])]
+    # Le modèle retenu est en or. Les deux autres se partagent encre et gris.
+    spare = [MUTED, INK]
+    spare_index = 0
+    for key in present:
+        part = bins.loc[bins["model"].eq(key)].sort_values("mean_predicted")
+        if key == chosen:
+            color = ACCENT
+            width = 2.6
+            level = 3
+        else:
+            color = spare[spare_index]
+            spare_index += 1
+            width = 1.6
+            level = 2
+        ax.plot(
+            part["mean_predicted"],
+            part["mean_observed"],
+            color=color,
+            linewidth=width,
+            marker="o",
+            markersize=7,
+            label=labels[key],
+            zorder=level,
+        )
+    limits = _square_limits(bins["mean_predicted"], bins["mean_observed"])
+    ax.plot(limits, limits, color=MUTED, linewidth=1, linestyle="--", zorder=1)
+    ax.set_xlim(limits)
+    ax.set_ylim(limits)
+    ax.set_xlabel(labels["predicted"])
+    ax.set_ylabel(labels["observed"])
+    ax.xaxis.set_major_formatter(_count_formatter(language))
+    ax.yaxis.set_major_formatter(_count_formatter(language))
+    legend = ax.legend(frameon=False, loc="upper left")
+    for text in legend.get_texts():
+        text.set_color(INK)
+    return _save(fig, path)
+
+
 def _labels(language: str) -> dict[str, str]:
     """Libellés d'un graphe. ``fr`` et ``en`` seulement."""
     if language not in _LABELS:
@@ -344,6 +523,27 @@ def _count_formatter(language: str) -> FuncFormatter:
         return text
 
     return FuncFormatter(_format)
+
+
+def _chart_labels(table: dict[str, dict[str, str]], language: str) -> dict[str, str]:
+    """Libellés d'un graphe de comparaison. ``fr`` et ``en`` seulement."""
+    if language not in table:
+        raise ValueError("language doit être 'fr' ou 'en'.")
+    return table[language]
+
+
+def _format_number(value: float, language: str, decimals: int) -> str:
+    """Entier lisible : espace en français, virgule en anglais."""
+    text = f"{value:,.{decimals}f}"
+    if language == "fr":
+        return text.replace(",", " ").replace(".", ",")
+    return text
+
+
+def _square_limits(predicted: pd.Series, observed: pd.Series) -> list[float]:
+    """Bornes communes, à partir de zéro, pour la diagonale de calibration."""
+    high = float(max(predicted.max(), observed.max(), 0.0))
+    return [0.0, high * 1.08 if high else 1.0]
 
 
 def _require_columns(frame: pd.DataFrame, columns: list[str]) -> None:

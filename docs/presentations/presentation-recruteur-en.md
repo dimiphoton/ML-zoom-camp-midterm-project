@@ -105,21 +105,24 @@ Not the commercial price, loadings and margin included.
 
 <!-- _class: chart -->
 
-## About one claim in a hundred contracts, or in two hundred.
+## The fitted line misses by a little less than “no fire”.
 
-It depends on the year label. Fire does not become common.
+Left of the line is closer. The gap stays thin: fire is rare.
 
-![w:980](../../pictures/presentations/part-sinistre-annee-en.png)
+![w:980](../../pictures/presentations/ecart-modeles-en.png)
 
 ---
 
-<!-- _class: chart -->
+<!-- _class: split -->
 
-## Four contracts are not a region.
+![bg left:42%](../../pictures/presentations/photos/couverture-champs.jpg)
 
-93 zones. Grey means fewer than 500 contracts: that rate is not a map of where fire starts.
+# This is not
+# a selling price.
 
-![w:980](../../pictures/presentations/zones-en.png)
+The line is the fire cost one can expect.
+
+**The trees come close. The insurance formula still sits behind “no fire”.**
 
 ---
 
@@ -129,11 +132,11 @@ It depends on the year label. Fire does not become common.
 
 # Monday.
 
-**Pricing** — separate "will there be a fire?" from "if there is one, what does it cost?"
+**Pricing** — start from the line, not the fullest tree.
 
-**Data** — a surface written twice is still one surface.
+**Reading** — the gain is real, and small.
 
-An expected cost, read from what we actually see.
+An expected cost, read on contracts kept aside.
 
 ---
 
@@ -145,4 +148,4 @@ An expected cost, read from what we actually see.
 
 [Source repository](https://github.com/dimiphoton/ML-zoom-camp-midterm-project)
 
-A first estimate, on contracts kept aside, does no better than expecting no fire.
+The line is the one we keep. “No fire” is still the number to beat.

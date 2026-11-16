@@ -156,14 +156,35 @@ The claim rate roughly doubles, and stays near 1%.
 
 ---
 
+<!-- _class: full -->
+
+![bg brightness:0.38](../../pictures/presentations/photos/physique-grange.jpg)
+
+# Ridge beats
+# the floor.
+
+RMSE **7,039.79** on 76,722 contracts. XGBoost 7,041.55. Predict 0: 7,045.28. Poisson–Tweedie: 7,047.10.
+
+---
+
+<!-- _class: chart -->
+
+## Ridge orders contracts, from the quiet ones to a fire.
+
+Six equal groups. Mean observed charge: 6 in the lowest, 740 in the highest. The dashed line is perfect agreement.
+
+![w:980](../../pictures/presentations/calibration-charge-en.png)
+
+---
+
 <!-- _class: dark -->
 
-# A sharp-looking model
-# can get away with zero.
+# The deepest tree
+# loses the tuning.
 
-Poisson and Tweedie baseline, one fifth of train held out. RMSE 7,047. Predict 0: 7,045.
+Eight settings. Depth 6 was the worst on the inner split.
 
-**It does not beat that floor.**
+**That split preferred the trees. The hold-out keeps Ridge.**
 
 ---
 
@@ -171,9 +192,11 @@ Poisson and Tweedie baseline, one fifth of train held out. RMSE 7,047. Predict 0
 
 # Where it breaks.
 
+The gain over “predict 0” is 5.5 RMSE points. The top sixth is still under-predicted.
+
 The year labels have no date. There is no client id.
 
-Station weather is missing on about 57% of rows. Three zones have fewer than 100 contracts.
+Station weather is missing on about 57% of rows.
 
 ---
 
@@ -185,7 +208,7 @@ Station weather is missing on about 57% of rows. Three zones have fewer than 100
 
 `pytest`
 
-`notebooks/eda.ipynb`
+`python scripts/select_models.py`
 
 [Code](https://github.com/dimiphoton/ML-zoom-camp-midterm-project)
 
