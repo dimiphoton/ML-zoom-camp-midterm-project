@@ -17,5 +17,5 @@ colonnes, sans cibles. Données locales dans `data/raw/`, non versionnées.
 - [x] Phase 5 — Baseline Poisson (fréquence) + Tweedie (coût moyen), RMSE sur un jeu tenu à part
 - [x] Phase 6 — Modèles linéaire et arbres, réglage, choix documenté, présentations du résultat
 - [x] Phase 7 — `train.py` entraîne le modèle retenu et le sauvegarde
-- [ ] Phase 8 — `predict.py`, Dockerfile, mode d'emploi, présentations d'usage
+- [x] Phase 8 — `predict.py`, Dockerfile, mode d'emploi, présentations d'usage
 - [ ] Phase 9 — Bonus cloud, après choix de l'hébergeur

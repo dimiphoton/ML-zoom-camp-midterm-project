@@ -130,13 +130,13 @@ The line is the fire cost one can expect.
 
 ![bg right:38%](../../pictures/presentations/photos/physique-grange.jpg)
 
-# Monday.
+# Monday, one contract.
 
-**Pricing** — start from the line, not the fullest tree.
+Describe the farm and how long the cover runs.
 
-**Reading** — the gain is real, and small.
+**The answer is the fire cost to expect.**
 
-An expected cost, read on contracts kept aside.
+Start from the line. The gain is real, and small.
 
 ---
 
@@ -144,8 +144,8 @@ An expected cost, read on contracts kept aside.
 
 ![bg brightness:0.30](../../pictures/presentations/photos/couverture-champs.jpg)
 
-# The detail is in the code.
+# It runs on your machine.
 
 [Source repository](https://github.com/dimiphoton/ML-zoom-camp-midterm-project)
 
-The line is the one we keep. “No fire” is still the number to beat.
+The instructions are in the repository.

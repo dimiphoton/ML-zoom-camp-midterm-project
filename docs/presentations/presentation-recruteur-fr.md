@@ -130,13 +130,13 @@ La droite donne le coût d'incendie que l'on peut attendre.
 
 ![bg right:38%](../../pictures/presentations/photos/physique-grange.jpg)
 
-# Lundi.
+# Lundi, un contrat.
 
-**Tarification** — partir de la droite, pas de l'arbre le plus chargé.
+On décrit l'exploitation et le temps couvert.
 
-**Lecture** — le gain est réel, et petit.
+**En retour : le coût d'incendie que l'on peut attendre.**
 
-Un coût attendu, lu sur des contrats mis de côté.
+On part de la droite. Le gain est réel, et petit.
 
 ---
 
@@ -144,8 +144,8 @@ Un coût attendu, lu sur des contrats mis de côté.
 
 ![bg brightness:0.30](../../pictures/presentations/photos/couverture-champs.jpg)
 
-# Le détail est dans le code.
+# On le lance sur sa machine.
 
 [Dépôt GitHub](https://github.com/dimiphoton/ML-zoom-camp-midterm-project)
 
-On retient la droite. « Aucun sinistre » reste le chiffre à battre.
+Le mode d'emploi est dans le dépôt.

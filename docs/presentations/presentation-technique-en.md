@@ -204,13 +204,17 @@ Station weather is missing on about 57% of rows.
 
 ![bg brightness:0.30](../../pictures/presentations/photos/couverture-champs.jpg)
 
-# Reproduce.
+# The ridge answers on your machine.
 
 `pytest`
 
-`python scripts/select_models.py`
-
 `python train.py`
+
+`docker build -t agri-fire .`
+
+`docker run --rm -p 9696:9696 agri-fire`
+
+Seven model columns in. `FREQ`, `CM`, and `CHARGE` come back.
 
 [Code](https://github.com/dimiphoton/ML-zoom-camp-midterm-project)
 

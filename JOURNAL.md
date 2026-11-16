@@ -88,3 +88,12 @@
   de l'apprentissage du coût ; les deux autres restent dans le RMSE.
 - Le test officiel (95 852 lignes) n'est pas lu. Les présentations ne font
   qu'enregistrer ce constat : le récit du résultat est pour la phase 6.
+
+## 2026-11-16 — Phase 8 : service local
+
+- `predict.py` charge `models/ridge.pkl` et expose `POST /predict`.
+  Entrée : les sept colonnes du modèle. Sortie : `FREQ`, `CM`, `CHARGE`.
+- Dockerfile et mode d'emploi dans le README : construire l'image,
+  la lancer sur le port 9696, l'interroger en local. Pas de cloud.
+- Présentations : un contrat décrit, un coût attendu en retour, lien
+  vers le dépôt. Les commandes Docker sont sur les decks techniques.

@@ -204,13 +204,17 @@ La météo de station manque sur environ 57 % des lignes.
 
 ![bg brightness:0.30](../../pictures/presentations/photos/couverture-champs.jpg)
 
-# Reproduire.
+# On interroge la ridge en local.
 
 `pytest`
 
-`python scripts/select_models.py`
-
 `python train.py`
+
+`docker build -t agri-fire .`
+
+`docker run --rm -p 9696:9696 agri-fire`
+
+Sept colonnes du modèle. La réponse : `FREQ`, `CM`, `CHARGE`.
 
 [Code](https://github.com/dimiphoton/ML-zoom-camp-midterm-project)
 

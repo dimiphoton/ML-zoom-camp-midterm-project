@@ -95,7 +95,7 @@ python -m pip install -e .
 pytest
 ```
 
-`pip install -e .` reads `pyproject.toml` and installs pandas, numpy, scikit-learn, xgboost, flask, matplotlib, and pytest. The prediction service follows the later steps in `ROADMAP.md`. The four CSV files in `data/raw/` are the data step for training and for that service.
+`pip install -e .` reads `pyproject.toml` and installs pandas, numpy, scikit-learn, xgboost, flask, matplotlib, and pytest. The four CSV files in `data/raw/` are the data step for training. The service below reads the model file that training writes.
 
 The comparison is recomputed from the two training files only. It takes about two minutes.
 
@@ -122,9 +122,68 @@ python train.py
 
 The same command works in bash. It reads `data/raw/train_input_Z61KlZo.csv` and `data/raw/train_output_DzPxaPY.csv`.
 
+## Serve the premium locally
+
+`predict.py` loads `models/ridge.pkl` and serves it with Flask on port 9696. The container listens on the machine that built it.
+
+A request sends the seven columns below. Surfaces and capitals are already summed. The response is the predicted frequency `FREQ`, the predicted average cost `CM`, and the pure premium `CHARGE` (frequency × average cost × `ANNEE_ASSURANCE`). A predicted frequency or average cost below zero is brought up to 0 before that product.
+
+| Column | What to send |
+|---|---|
+| `ACTIVIT2` | Activity |
+| `VOCATION` | Farm vocation |
+| `ZONE` | Zone |
+| `ANNEE_ASSURANCE` | Years insured on the row. Zero is allowed. A negative value is rejected |
+| `surface_sum` | Sum of the surface columns, without the copies `SURFACE2` and `SURFACE6` |
+| `capital_amount` | Sum of the amounts `KAPITAL11` to `KAPITAL33` |
+| `capital_flags` | Count of the capital indicators |
+
+Train first, so `models/ridge.pkl` exists. Then build the image and start it, from the repository root. The same two Docker commands work in PowerShell and in bash.
+
+```bash
+docker build -t agri-fire .
+docker run --rm -p 9696:9696 agri-fire
+```
+
+Ask it from another terminal.
+
+Windows (PowerShell):
+
+```powershell
+$body = @{
+  ACTIVIT2 = "ACT1"
+  VOCATION = "VOC1"
+  ZONE = "1"
+  ANNEE_ASSURANCE = 1
+  surface_sum = 1200
+  capital_amount = 50000
+  capital_flags = 3
+} | ConvertTo-Json
+
+Invoke-RestMethod `
+  -Uri http://127.0.0.1:9696/predict `
+  -Method Post `
+  -Body $body `
+  -ContentType "application/json; charset=utf-8"
+```
+
+macOS and Linux:
+
+```bash
+curl -s -X POST http://127.0.0.1:9696/predict \
+  -H "Content-Type: application/json" \
+  -d '{"ACTIVIT2":"ACT1","VOCATION":"VOC1","ZONE":"1","ANNEE_ASSURANCE":1,"surface_sum":1200,"capital_amount":50000,"capital_flags":3}'
+```
+
+The answer is a JSON object with `FREQ`, `CM`, and `CHARGE`. A JSON array of contracts returns an array, in the same order. A missing column returns HTTP 400. The numbers above are an example, not a row from the files.
+
+`python predict.py` starts the same service without Docker, from the virtual environment, after `python train.py`. `MODEL_PATH` overrides the pickle path.
+
 ## Repo structure
 
 - `train.py` — fits the retained ridge and writes `models/ridge.pkl`
+- `predict.py` — loads that file and serves `POST /predict`
+- `Dockerfile` — local image of the service, port 9696
 - `models/` — saved model, produced when you run `train.py`
 - `data/raw/` — the four local CSV files, not versioned
 - `experiments/` — variable dictionary and example notebook
