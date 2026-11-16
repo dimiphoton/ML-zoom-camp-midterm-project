@@ -161,9 +161,9 @@ Le taux de sinistre va du simple au double, et reste autour de 1 %.
 # Un modèle voyant
 # peut se contenter de zéro.
 
-Le coût s'apprend sur 2 894 contrats. Aucun modèle n'est ajusté ici.
+Baseline Poisson et Tweedie, un cinquième du train tenu à part. RMSE 7 047. Prédire 0 : 7 045.
 
-**La suite doit battre le RMSE de 6 803.**
+**Elle ne bat pas ce plancher.**
 
 ---
 

@@ -145,4 +145,4 @@ Un coût attendu, à partir de ce qu'on observe.
 
 [Dépôt GitHub](https://github.com/dimiphoton/ML-zoom-camp-midterm-project)
 
-Le modèle de prime vient ensuite.
+Une première estimation, sur des contrats mis de côté, ne fait pas mieux que prévoir aucun sinistre.
