@@ -65,6 +65,17 @@
 - Présentations : l'écart avec « aucun sinistre » pour un lecteur non
   spécialiste, et la charge observée par tranche de prédiction.
 
+## 2026-11-16 — Phase 7 : script d'entraînement
+
+- `train.py` ajuste la ridge retenue (pénalité 10 000 sur la fréquence,
+  100 sur le coût) sur toutes les lignes du train et écrit
+  `models/ridge.pkl`. Il appelle `fit_ridge` : pas une seconde formule.
+- Le hold-out n'est pas refait. Le test officiel n'est pas lu. Un test
+  sur un petit jeu vérifie que l'artefact se recharge et renvoie une
+  `CHARGE`.
+- Les decks techniques citent `python train.py`. Le récit recruteur
+  ne change pas : le modèle servi est le même.
+
 ## 2026-11-16 — Phase 5 : baseline
 
 - Poisson scikit-learn sur toutes les lignes d'un split aléatoire (graine 42,

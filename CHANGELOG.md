@@ -2,6 +2,7 @@
 
 ## [Non publié]
 
+- `train.py` ajuste la ridge retenue (pénalité 10 000 et 100) sur toutes les lignes du train et écrit `models/ridge.pkl`. Même formule que `fit_ridge`. Le test officiel n'est pas lu.
 - Sélection au RMSE sur le même hold-out : ridge retenue (pénalité 10 000 sur la fréquence, 100 sur le coût), RMSE 7 039,79. XGBoost 7 041,55, plancher « prédire 0 » 7 045,28, baseline Poisson–Tweedie 7 047,10. Le réglage se fait sur une découpe interne. Le test officiel n'est pas utilisé.
 - Baseline Poisson (fréquence) et Tweedie (coût moyen), hold-out 20 % du train, graine 42. RMSE 7 047,10 contre 7 045,28 en prédisant 0. Le test officiel n'est pas utilisé.
 - Exploration : 99,25 % de contrats sans sinistre, exposition, neuf millésimes, 93 zones, colonnes redondantes (surfaces, capitaux, somme météo). Notebook `notebooks/eda.ipynb`, note `docs/eda.md`, première version des quatre présentations.
