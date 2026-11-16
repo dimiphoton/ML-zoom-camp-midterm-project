@@ -14,9 +14,9 @@ paginate: true
 # sur deux ou trois
 # lignes ?
 
-[Métier] · [Domaine] · [Stack]
+Machine learning · Agriculture
 
-Wallonie · période
+France · 9 exercices anonymisés
 
 ---
 

@@ -13,9 +13,9 @@ paginate: true
 # [Question de recherche]
 # en une assertion
 
-[Métier] · [Domaine] · [Stack]
+Machine learning · Agriculture · Python / scikit-learn / XGBoost / Flask
 
-Wallonie · période · grain des données
+France · 9 exercices anonymisés · 1 ligne = 1 contrat × 1 exercice
 
 ---
 

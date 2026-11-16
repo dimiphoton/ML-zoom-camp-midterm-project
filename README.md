@@ -2,25 +2,35 @@
 
 | | |
 |---|---|
-| **Role** | TBD — BI / Data engineering / Machine learning / Geospatial |
-| **Domain** | TBD — Energy / Agriculture / Buildings / Mobility / Public statistics |
-| **Stack** | TBD — e.g. ![Python](https://img.shields.io/badge/Python-3.11-blue?logo=python&logoColor=white) (4–5 badges max) |
-| **Level** | TBD (Beginner / Intermediate / Advanced) |
-| **Status** | TBD |
+| **Role** | Machine learning |
+| **Domain** | Agriculture |
+| **Stack** | ![Python](https://img.shields.io/badge/Python-3.11-3776AB?logo=python&logoColor=white) ![scikit-learn](https://img.shields.io/badge/scikit--learn-F7931E?logo=scikitlearn&logoColor=white) ![XGBoost](https://img.shields.io/badge/XGBoost-337AB7?logo=xgboost&logoColor=white) ![Flask](https://img.shields.io/badge/Flask-000000?logo=flask&logoColor=white) |
+| **Level** | Intermediate |
+| **Status** | Draft |
 
 The Role · Domain · Stack line is filled from `brief/identite.md` at kickoff.
 
 ## Objective
 
-TBD: what problem this project solves, and for whom.
+Predict the fire pure premium of a French multi-risk farm insurance
+contract. The pure premium (`CHARGE`) is claim frequency times average
+claim cost times years insured. The model is chosen by RMSE on that
+charge. A frequency model and a severity model are trained separately,
+then multiplied.
 
 ## Data
 
-TBD: data source, volume, time period covered.
+Local challenge extracts in `data/raw/` (gitignored, not in this
+repository): 383,610 training rows and 95,852 test rows, 374 columns,
+nine anonymised exercise years. One row is one contract over one
+exercise year. Targets (`FREQ`, `CM`, `CHARGE`) are in the training
+output file only.
 
 ## Result
 
-TBD: the concrete result, in one or two sentences.
+Not estimated yet. On the training set, predicting zero charge everywhere
+already sits at an RMSE of about 6,803, because 99.25% of contracts have
+no fire claim.
 
 ## Reproduce
 

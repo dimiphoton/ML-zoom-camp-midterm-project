@@ -17,16 +17,16 @@ par champ. L'agent propose, l'utilisateur valide.
 
 | Champ | Valeur (FR) | Valeur (EN, pour le README) |
 |---|---|---|
-| **Métier** | _à valider_ | _à valider_ |
-| **Domaine** | _à valider_ | _à valider_ |
-| **Stack courte** | _ex. Python / DuckDB / Streamlit_ (4 outils max) | idem |
-| **Ligne identité** | `_Métier_ · _Domaine_ · _Stack courte_` | `_Role_ · _Domain_ · _Stack_` |
-| **Topics GitHub** | _5 tags max, voir table plus bas_ | |
-| **About GitHub** | _la ligne identité EN, ≤ 80 caractères_ | |
+| **Métier** | Machine learning | Machine learning |
+| **Domaine** | Agriculture | Agriculture |
+| **Stack courte** | Python / scikit-learn / XGBoost / Flask | Python / scikit-learn / XGBoost / Flask |
+| **Ligne identité** | Machine learning · Agriculture · Python / scikit-learn / XGBoost / Flask | Machine learning · Agriculture · Python / scikit-learn / XGBoost / Flask |
+| **Topics GitHub** | `machine-learning` `agriculture` `python` `scikit-learn` `xgboost` | |
+| **About GitHub** | Machine learning · Agriculture · Python / scikit-learn / XGBoost / Flask | |
 
 Période / maille des données (pour la cover, en plus de la ligne) :
 
-- _ex. Wallonie · 2000–2024_
+- France · 9 exercices anonymisés (`ANNEE1`–`ANNEE9`) · une ligne = un contrat × un exercice
 
 Une fois validé : recopier dans le tableau du `README.md`, sur la cover
 des 4 présentations, puis `gh repo edit` (description + topics) si le

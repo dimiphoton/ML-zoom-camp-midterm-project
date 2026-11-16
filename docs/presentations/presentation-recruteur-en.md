@@ -14,9 +14,9 @@ paginate: true
 # on two or three
 # lines?
 
-[Role] · [Domain] · [Stack]
+Machine learning · Agriculture
 
-Wallonia · period
+France · 9 anonymised exercise years
 
 ---
 

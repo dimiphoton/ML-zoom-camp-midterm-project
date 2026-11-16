@@ -13,9 +13,9 @@ paginate: true
 # [Research question]
 # as one assertion
 
-[Role] · [Domain] · [Stack]
+Machine learning · Agriculture · Python / scikit-learn / XGBoost / Flask
 
-Wallonia · period · data grain
+France · 9 anonymised exercise years · 1 row = 1 contract × 1 exercise year
 
 ---
 
