@@ -54,6 +54,10 @@ Column labels are in `experiments/Descriptif_données.xlsx`. The challenge noteb
 
 No model is selected yet. The training-set floor is an RMSE of about 6,803, from predicting zero charge on every contract.
 
+## What the training rows show
+
+99.25% of training contracts have no fire claim. Insured time is under one year on 54.7% of rows and exactly one year on 44.6%. The nine anonymised years stay in a narrow band of claim rates, while row counts run from about 27,000 to 78,000. There are 93 zones. Some surface, capital and weather columns repeat the same fact. The walkthrough is `notebooks/eda.ipynb`; the figures are in `docs/eda.md`.
+
 ## Reproduce
 
 Python 3.11 or newer. From the repository root, create a virtual environment, activate it, install the declared dependencies, and run the tests.
@@ -85,6 +89,8 @@ pytest
 - `src/agri_fire/` — Python package
 - `docs/decisions.md` — metric, split, and stack already chosen
 - `docs/qualite-donnees.md` — row count, missing values, charge formula
+- `docs/eda.md` — zeros, exposure, years, zones, duplicated columns
+- `notebooks/eda.ipynb` — calls `agri_fire.eda` on the local train
 - `docs/presentations/` — slide sources
 - `ROADMAP.md`, `JOURNAL.md` — plan and development log, in French
 
