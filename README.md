@@ -52,13 +52,20 @@ Column labels are in `experiments/Descriptif_données.xlsx`. The challenge noteb
 
 ## Result
 
-No model is selected yet. A first baseline is scored on a 20% row hold-out of the training set (seed 42, 76,722 contracts). The official test file is not used for that score.
+The selected model is a ridge regression. It uses the same 20% row hold-out as the baseline (seed 42, 76,722 contracts) and the same inputs: activity, vocation, zone, exposure, and three aggregates. The official test file is not used.
 
-The baseline is a scikit-learn Poisson GLM for `FREQ`, fit on every training row of the split, and a Tweedie GLM (power 1.5, log link) for `CM`, fit only on rows with at least one claim and a non-negative cost. Predicted `CHARGE` = predicted frequency × predicted average cost × `ANNEE_ASSURANCE`.
+Frequency is a ridge fit on every learning row. Average cost is a ridge fit only on rows with at least one claim and a non-negative cost. Predicted `CHARGE` = predicted frequency × predicted average cost × `ANNEE_ASSURANCE`. A negative component is clipped to 0 before that product.
 
-The inputs are activity, vocation, zone, exposure, and three aggregates: surface (duplicate surface columns are not added twice), insured capital, and a count of capital flags.
+Penalties and the tree settings are chosen on an inner 20% split of the learning rows, same seed. The hold-out is used once, to compare the finished models.
 
-On the hold-out, the baseline RMSE is **7,047.10**. Predicting 0 on the same rows scores **7,045.28**. This baseline does not beat that floor.
+| Candidate | Hold-out RMSE |
+|---|---|
+| Ridge (frequency penalty 10,000, cost penalty 100) | **7,039.79** |
+| XGBoost (depth 4, learning rate 0.05, 250 trees, leaf weight 40) | 7,041.55 |
+| Predict 0 | 7,045.28 |
+| Poisson–Tweedie baseline | 7,047.10 |
+
+Ridge is the one we keep. It beats the floor and the baseline. The trees also beat them, by less. On the inner split the trees scored better (6,764.82 against 6,769.35). That split is not where the choice is made. Depth 6 was the worst of the eight tree settings. XGBoost fits frequency with squared error, because `FREQ` is a rate, and fits cost with a Tweedie objective (power 1.5), the same variance family as the baseline.
 
 ## What the training rows show
 
@@ -88,16 +95,18 @@ pytest
 
 `pip install -e .` reads `pyproject.toml` and installs pandas, numpy, scikit-learn, xgboost, flask, matplotlib, and pytest. Training and the prediction service follow the later steps in `ROADMAP.md`. The data step for those steps is the table above: the four CSV files in `data/raw/`.
 
-The baseline score is recomputed from the two training files only:
+The comparison is recomputed from the two training files only. It takes about two minutes.
 
 ```python
-from agri_fire.models.baseline import evaluate_training_files
+from agri_fire.models.selection import evaluate_selection_files
 
-evaluate_training_files(
+evaluate_selection_files(
     "data/raw/train_input_Z61KlZo.csv",
     "data/raw/train_output_DzPxaPY.csv",
 )
 ```
+
+`python scripts/select_models.py` runs the same comparison and rewrites the two figures in `pictures/presentations/`.
 
 ## Repo structure
 

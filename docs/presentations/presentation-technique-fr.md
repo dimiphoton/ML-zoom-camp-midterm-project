@@ -156,14 +156,35 @@ Le taux de sinistre va du simple au double, et reste autour de 1 %.
 
 ---
 
+<!-- _class: full -->
+
+![bg brightness:0.38](../../pictures/presentations/photos/physique-grange.jpg)
+
+# Ridge passe
+# sous le plancher.
+
+RMSE **7 039,79** sur 76 722 contrats. XGBoost 7 041,55. Prédire 0 : 7 045,28. Poisson–Tweedie : 7 047,10.
+
+---
+
+<!-- _class: chart -->
+
+## Ridge range les contrats, du calme vers le sinistre.
+
+Six parts égales. Charge observée moyenne : 6 en bas, 740 en haut. Le pointillé est l'accord parfait.
+
+![w:980](../../pictures/presentations/calibration-charge-fr.png)
+
+---
+
 <!-- _class: dark -->
 
-# Un modèle voyant
-# peut se contenter de zéro.
+# L'arbre le plus profond
+# n'est pas le bon.
 
-Baseline Poisson et Tweedie, un cinquième du train tenu à part. RMSE 7 047. Prédire 0 : 7 045.
+Huit réglages. Profondeur 6 : le pire sur la découpe interne.
 
-**Elle ne bat pas ce plancher.**
+**Cette découpe préférait les arbres. Le hold-out départage, et il retient Ridge.**
 
 ---
 
@@ -171,9 +192,11 @@ Baseline Poisson et Tweedie, un cinquième du train tenu à part. RMSE 7 047. Pr
 
 # Où ça casse.
 
+Le gain sur « prédire 0 » est de 5,5 points de RMSE. Le sixième le plus haut reste sous-estimé.
+
 Les millésimes n'ont pas de date. Pas d'identifiant client.
 
-La météo de station manque sur environ 57 % des lignes. Trois zones ont moins de 100 contrats.
+La météo de station manque sur environ 57 % des lignes.
 
 ---
 
@@ -185,7 +208,7 @@ La météo de station manque sur environ 57 % des lignes. Trois zones ont moins 
 
 `pytest`
 
-`notebooks/eda.ipynb`
+`python scripts/select_models.py`
 
 [Code](https://github.com/dimiphoton/ML-zoom-camp-midterm-project)
 

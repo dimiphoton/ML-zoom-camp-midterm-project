@@ -105,21 +105,24 @@ Pas le prix commercial, charges et marge comprises.
 
 <!-- _class: chart -->
 
-## Environ un contrat sinistré sur cent, ou sur deux cents.
+## La droite se trompe un peu moins que « pas d'incendie ».
 
-Selon le millésime. Le feu ne devient pas courant.
+À gauche du trait, c'est plus juste. L'écart reste mince : le feu est rare.
 
-![w:980](../../pictures/presentations/part-sinistre-annee-fr.png)
+![w:980](../../pictures/presentations/ecart-modeles-fr.png)
 
 ---
 
-<!-- _class: chart -->
+<!-- _class: split -->
 
-## Quatre contrats ne font pas un territoire.
+![bg left:42%](../../pictures/presentations/photos/couverture-champs.jpg)
 
-93 zones. En gris, moins de 500 contrats : leur taux ne dit pas où le feu prend.
+# Ce n'est pas
+# un prix de vente.
 
-![w:980](../../pictures/presentations/zones-fr.png)
+La droite donne le coût d'incendie que l'on peut attendre.
+
+**Les arbres s'en approchent. La formule d'assurance reste derrière « aucun sinistre ».**
 
 ---
 
@@ -129,11 +132,11 @@ Selon le millésime. Le feu ne devient pas courant.
 
 # Lundi.
 
-**Tarification** — séparer « y aura-t-il un feu ? » et « s'il y en a un, combien ? ».
+**Tarification** — partir de la droite, pas de l'arbre le plus chargé.
 
-**Données** — une surface écrite deux fois reste une seule surface.
+**Lecture** — le gain est réel, et petit.
 
-Un coût attendu, à partir de ce qu'on observe.
+Un coût attendu, lu sur des contrats mis de côté.
 
 ---
 
@@ -145,4 +148,4 @@ Un coût attendu, à partir de ce qu'on observe.
 
 [Dépôt GitHub](https://github.com/dimiphoton/ML-zoom-camp-midterm-project)
 
-Une première estimation, sur des contrats mis de côté, ne fait pas mieux que prévoir aucun sinistre.
+On retient la droite. « Aucun sinistre » reste le chiffre à battre.

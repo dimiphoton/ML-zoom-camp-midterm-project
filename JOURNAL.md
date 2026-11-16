@@ -54,6 +54,17 @@
 - Première version des 4 présentations : cadrage du problème, questions
   de couverture encore ouvertes. Graphes dans `pictures/presentations/`.
 
+## 2026-11-16 — Phase 6 : sélection
+
+- Ridge et XGBoost sur le même hold-out que la baseline (graine 42, 76 722
+  lignes). Le coût moyen ne s'apprend que sur les sinistres à coût positif
+  ou nul. Le réglage utilise une découpe interne, pas le hold-out.
+- RMSE : ridge 7 039,79 (pénalité 10 000 et 100), XGBoost 7 041,55
+  (profondeur 4, 250 arbres), prédire 0 fait 7 045,28, Poisson–Tweedie
+  7 047,10. On retient la droite. Les arbres gagnaient la découpe interne.
+- Présentations : l'écart avec « aucun sinistre » pour un lecteur non
+  spécialiste, et la charge observée par tranche de prédiction.
+
 ## 2026-11-16 — Phase 5 : baseline
 
 - Poisson scikit-learn sur toutes les lignes d'un split aléatoire (graine 42,
