@@ -11,7 +11,7 @@ Apprentissage : 383 610 lignes × 374 colonnes. Test : 95 852 lignes, mêmes
 colonnes, sans cibles. Données locales dans `data/raw/`, non versionnées.
 
 - [x] Phase 1 — Décrire le problème dans le README (contexte, usage, métrique, données locales)
-- [ ] Phase 2 — Renommer le package `agri_fire`, déclarer les dépendances validées, documenter le venv
+- [x] Phase 2 — Renommer le package `agri_fire`, déclarer les dépendances validées, documenter le venv
 - [ ] Phase 3 — Rapport testé : grain, manquants, formule de la charge
 - [ ] Phase 4 — EDA (zéros, exposition, années, zones, blocs redondants) et première version des 4 présentations
 - [ ] Phase 5 — Baseline Poisson (fréquence) + Tweedie (coût moyen), RMSE sur un jeu tenu à part
