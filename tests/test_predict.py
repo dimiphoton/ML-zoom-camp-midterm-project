@@ -13,7 +13,7 @@ import pytest
 from agri_fire.models.artifact import save_model
 from agri_fire.models.selection import fit_ridge
 from agri_fire.service import PredictionError, contracts_frame, predict_contracts
-from predict import create_app
+from predict import create_app, listen_port
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -143,8 +143,30 @@ def test_predict_script_uses_the_package() -> None:
     assert "load_model" in source
     assert "predict_contracts" in source
     assert "Flask" in source
+    assert "listen_port" in source
     assert "Ridge(" not in source
     assert "9696" in source
+
+
+def test_listen_port_defaults_to_9696(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Sans PORT, le service local reste sur 9696."""
+    monkeypatch.delenv("PORT", raising=False)
+    assert listen_port() == 9696
+
+
+def test_listen_port_reads_the_host_port(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Render envoie le trafic sur PORT, souvent 10000."""
+    monkeypatch.setenv("PORT", "10000")
+    assert listen_port() == 10000
+
+
+def test_listen_port_rejects_a_value_that_is_not_a_port(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Un PORT illisible arrête le processus au lieu d'écouter au hasard."""
+    monkeypatch.setenv("PORT", "abc")
+    with pytest.raises(SystemExit):
+        listen_port()
 
 
 def test_dockerfile_runs_the_service() -> None:

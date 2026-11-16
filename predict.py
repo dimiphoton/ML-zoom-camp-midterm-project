@@ -7,8 +7,9 @@ sept colonnes du modèle et reçoit ``FREQ``, ``CM`` et ``CHARGE``.
 
     python predict.py
 
-Le service écoute sur le port 9696. ``MODEL_PATH`` remplace le chemin
-du pickle si besoin.
+En local, le service écoute sur le port 9696. Render envoie le trafic
+sur la variable d'environnement ``PORT`` (souvent 10000). ``MODEL_PATH``
+remplace le chemin du pickle si besoin.
 """
 
 import os
@@ -23,7 +24,7 @@ ROOT = Path(__file__).resolve().parent
 ARTIFACT = ROOT / "models" / "ridge.pkl"
 # 0.0.0.0 : dans Docker, localhost ne verrait que l'intérieur du conteneur.
 HOST = "0.0.0.0"
-PORT = 9696
+DEFAULT_PORT = 9696
 _BODY_ERROR = "Le corps doit être un contrat ou une liste de contrats."
 
 
@@ -62,14 +63,39 @@ def create_app(model_path: Path | str | None = None) -> Flask:
 
 
 def main() -> None:
-    """Charge l'artefact et écoute sur le port 9696."""
+    """Charge l'artefact et écoute sur ``PORT``, ou 9696 en local."""
     path = _resolve_model_path(None)
     if not path.is_file():
         raise SystemExit(
             f"Artefact introuvable : {path}. Lancez python train.py avant le service."
         )
     application = create_app(path)
-    application.run(host=HOST, port=PORT, debug=False, use_reloader=False)
+    application.run(host=HOST, port=listen_port(), debug=False, use_reloader=False)
+
+
+def listen_port() -> int:
+    """Port d'écoute : ``PORT`` si l'hébergeur le fournit, sinon 9696.
+
+    Returns
+    -------
+    int
+        Port entre 1 et 65535.
+
+    Raises
+    ------
+    SystemExit
+        ``PORT`` n'est pas un entier de cet intervalle.
+    """
+    raw = os.environ.get("PORT")
+    if raw is None or raw.strip() == "":
+        return DEFAULT_PORT
+    try:
+        port = int(raw.strip())
+    except ValueError as exc:
+        raise SystemExit(f"PORT invalide : {raw}") from exc
+    if not 1 <= port <= 65535:
+        raise SystemExit(f"PORT invalide : {raw}")
+    return port
 
 
 def _resolve_model_path(model_path: Path | str | None) -> Path:

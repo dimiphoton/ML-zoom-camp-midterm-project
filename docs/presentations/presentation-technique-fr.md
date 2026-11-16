@@ -214,6 +214,8 @@ La météo de station manque sur environ 57 % des lignes.
 
 `docker run --rm -p 9696:9696 agri-fire`
 
+Le même conteneur part sur Render. Les commandes sont dans le README.
+
 Sept colonnes du modèle. La réponse : `FREQ`, `CM`, `CHARGE`.
 
 [Code](https://github.com/dimiphoton/ML-zoom-camp-midterm-project)

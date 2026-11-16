@@ -124,7 +124,7 @@ The same command works in bash. It reads `data/raw/train_input_Z61KlZo.csv` and 
 
 ## Serve the premium locally
 
-`predict.py` loads `models/ridge.pkl` and serves it with Flask on port 9696. The container listens on the machine that built it.
+`predict.py` loads `models/ridge.pkl` and serves it with Flask on port 9696. The container listens on the machine that built it. `PORT` changes that port. Leave it unset locally.
 
 A request sends the seven columns below. Surfaces and capitals are already summed. The response is the predicted frequency `FREQ`, the predicted average cost `CM`, and the pure premium `CHARGE` (frequency × average cost × `ANNEE_ASSURANCE`). A predicted frequency or average cost below zero is brought up to 0 before that product.
 
@@ -179,11 +179,74 @@ The answer is a JSON object with `FREQ`, `CM`, and `CHARGE`. A JSON array of con
 
 `python predict.py` starts the same service without Docker, from the virtual environment, after `python train.py`. `MODEL_PATH` overrides the pickle path.
 
+## Deploy on Render
+
+The same image can answer on the public internet. [Render](https://render.com) runs it as a free web service and gives it an `onrender.com` URL. No credit card. The free instance sleeps after 15 minutes without a request and takes about a minute to wake up.
+
+This repository does not publish a live URL. Creating the Docker Hub login and the Render account is yours. The steps below are the whole deployment.
+
+`models/ridge.pkl` is not in git. Build the image on your machine, after `python train.py`, so the pickle is inside it. Render pulls that image. It does not see `data/raw/` and it does not train.
+
+Render sets `PORT` (10000). `predict.py` listens on it. Locally, without `PORT`, the port stays 9696.
+
+From the repository root, with Docker running. The commands are the same in PowerShell and in bash. Replace `YOUR_DOCKERHUB_USER` with your Docker Hub login.
+
+```bash
+python train.py
+docker build -t agri-fire .
+docker tag agri-fire YOUR_DOCKERHUB_USER/agri-fire:latest
+docker push YOUR_DOCKERHUB_USER/agri-fire:latest
+```
+
+`docker push` asks you to `docker login` first.
+
+In the [Render dashboard](https://dashboard.render.com):
+
+1. **New → Web Service**.
+2. **Existing Image**. Image URL: `docker.io/YOUR_DOCKERHUB_USER/agri-fire:latest`.
+3. Instance type: **Free**. Leave the start command empty, so the image runs `python predict.py`.
+4. Create the service. The public URL looks like `https://agri-fire.onrender.com`.
+
+`render.yaml` is that service written down (free instance, Frankfurt, the same image). Replace `YOUR_DOCKERHUB_USER` in the file, then in the dashboard choose **New → Blueprint** and point it at the repository. The dashboard clicks above are enough if you skip the blueprint.
+
+Ask the public URL from another terminal. The first call after a sleep can take about a minute. The body is the same example as the local service.
+
+Windows (PowerShell):
+
+```powershell
+$body = @{
+  ACTIVIT2 = "ACT1"
+  VOCATION = "VOC1"
+  ZONE = "1"
+  ANNEE_ASSURANCE = 1
+  surface_sum = 1200
+  capital_amount = 50000
+  capital_flags = 3
+} | ConvertTo-Json
+
+Invoke-RestMethod `
+  -Uri https://YOUR_SERVICE.onrender.com/predict `
+  -Method Post `
+  -Body $body `
+  -ContentType "application/json; charset=utf-8"
+```
+
+macOS and Linux:
+
+```bash
+curl -s -X POST https://YOUR_SERVICE.onrender.com/predict \
+  -H "Content-Type: application/json" \
+  -d '{"ACTIVIT2":"ACT1","VOCATION":"VOC1","ZONE":"1","ANNEE_ASSURANCE":1,"surface_sum":1200,"capital_amount":50000,"capital_flags":3}'
+```
+
+The answer is again `FREQ`, `CM`, and `CHARGE`.
+
 ## Repo structure
 
 - `train.py` — fits the retained ridge and writes `models/ridge.pkl`
 - `predict.py` — loads that file and serves `POST /predict`
-- `Dockerfile` — local image of the service, port 9696
+- `Dockerfile` — image of the service, port 9696 locally, `PORT` on Render
+- `render.yaml` — Render blueprint for that image (fill in the Docker Hub user)
 - `models/` — saved model, produced when you run `train.py`
 - `data/raw/` — the four local CSV files, not versioned
 - `experiments/` — variable dictionary and example notebook

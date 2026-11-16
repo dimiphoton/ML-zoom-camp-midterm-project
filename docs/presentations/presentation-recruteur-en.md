@@ -148,4 +148,4 @@ Start from the line. The gain is real, and small.
 
 [Source repository](https://github.com/dimiphoton/ML-zoom-camp-midterm-project)
 
-The instructions are in the repository.
+The same service can answer online. The commands are in the repository.

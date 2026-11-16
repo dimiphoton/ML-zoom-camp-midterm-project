@@ -2,7 +2,8 @@
 
 ## [Non publié]
 
-- `predict.py` charge `models/ridge.pkl` et sert `POST /predict` : les 7 colonnes du modèle en entrée, `FREQ`, `CM` et `CHARGE` en sortie. Dockerfile pour lancer ce service en local sur le port 9696. Pas de déploiement cloud.
+- Déploiement Render documenté : `predict.py` écoute `PORT` (9696 sans cette variable), `render.yaml` décrit le web service gratuit, le README donne les commandes Docker Hub et l'appel public. Pas d'URL en ligne tant que le compte Render n'est pas créé.
+- `predict.py` charge `models/ridge.pkl` et sert `POST /predict` : les 7 colonnes du modèle en entrée, `FREQ`, `CM` et `CHARGE` en sortie. Dockerfile pour lancer ce service en local sur le port 9696.
 - `train.py` ajuste la ridge retenue (pénalité 10 000 et 100) sur toutes les lignes du train et écrit `models/ridge.pkl`. Même formule que `fit_ridge`. Le test officiel n'est pas lu.
 - Sélection au RMSE sur le même hold-out : ridge retenue (pénalité 10 000 sur la fréquence, 100 sur le coût), RMSE 7 039,79. XGBoost 7 041,55, plancher « prédire 0 » 7 045,28, baseline Poisson–Tweedie 7 047,10. Le réglage se fait sur une découpe interne. Le test officiel n'est pas utilisé.
 - Baseline Poisson (fréquence) et Tweedie (coût moyen), hold-out 20 % du train, graine 42. RMSE 7 047,10 contre 7 045,28 en prédisant 0. Le test officiel n'est pas utilisé.

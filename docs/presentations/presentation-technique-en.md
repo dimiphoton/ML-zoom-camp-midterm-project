@@ -214,6 +214,8 @@ Station weather is missing on about 57% of rows.
 
 `docker run --rm -p 9696:9696 agri-fire`
 
+The same container goes to Render. The commands are in the README.
+
 Seven model columns in. `FREQ`, `CM`, and `CHARGE` come back.
 
 [Code](https://github.com/dimiphoton/ML-zoom-camp-midterm-project)
