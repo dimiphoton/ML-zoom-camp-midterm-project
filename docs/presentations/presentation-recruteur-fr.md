@@ -148,4 +148,4 @@ On part de la droite. Le gain est réel, et petit.
 
 [Dépôt GitHub](https://github.com/dimiphoton/ML-zoom-camp-midterm-project)
 
-Le mode d'emploi est dans le dépôt.
+Le même service peut répondre en ligne. Les commandes sont dans le dépôt.

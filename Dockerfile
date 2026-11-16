@@ -1,4 +1,5 @@
-# Image du service local. Le pickle vient de `python train.py` avant le build.
+# Image du service. Le pickle vient de `python train.py` avant le build.
+# En local le port publié est 9696. Sur Render, predict.py lit PORT.
 FROM python:3.11-slim
 
 WORKDIR /app

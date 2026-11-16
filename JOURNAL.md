@@ -97,3 +97,14 @@
   la lancer sur le port 9696, l'interroger en local. Pas de cloud.
 - Présentations : un contrat décrit, un coût attendu en retour, lien
   vers le dépôt. Les commandes Docker sont sur les decks techniques.
+
+## 2026-11-16 — Phase 9 : Render
+
+- Hébergeur retenu : Render, web service gratuit, image Docker déjà
+  construite. `predict.py` écoute `PORT`, et 9696 si la variable est
+  absente. Pas de gunicorn.
+- `render.yaml` et le README décrivent le push Docker Hub, la création
+  du service et l'appel `POST /predict`. Le pickle n'est pas dans git :
+  il voyage dans l'image.
+- Aucun compte créé, aucune image poussée, pas d'URL publique. Le
+  second point du barème cloud attend cette URL.

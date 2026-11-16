@@ -18,4 +18,4 @@ colonnes, sans cibles. Données locales dans `data/raw/`, non versionnées.
 - [x] Phase 6 — Modèles linéaire et arbres, réglage, choix documenté, présentations du résultat
 - [x] Phase 7 — `train.py` entraîne le modèle retenu et le sauvegarde
 - [x] Phase 8 — `predict.py`, Dockerfile, mode d'emploi, présentations d'usage
-- [ ] Phase 9 — Bonus cloud, après choix de l'hébergeur
+- [x] Phase 9 — Bonus cloud Render : `PORT`, `render.yaml`, mode d'emploi. L'URL publique attend le compte.

@@ -1,0 +1,11 @@
+# Blueprint Render. L'image est construite en local : elle contient
+# models/ridge.pkl, qui n'est pas dans le dépôt. Remplacer
+# YOUR_DOCKERHUB_USER avant d'appliquer ce fichier.
+services:
+  - type: web
+    name: agri-fire
+    runtime: image
+    plan: free
+    region: frankfurt
+    image:
+      url: docker.io/YOUR_DOCKERHUB_USER/agri-fire:latest
