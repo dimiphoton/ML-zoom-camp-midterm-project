@@ -7,12 +7,11 @@ paginate: true
 <!-- _class: cover -->
 <!-- _paginate: false -->
 
-<!-- Photo: pictures/presentations/photos/hero.png -->
-<!-- ![bg brightness:0.40](../../pictures/presentations/photos/hero.png) -->
+![bg brightness:0.40](../../pictures/presentations/photos/couverture-champs.jpg)
 
-# [Human question]
-# on two or three
-# lines?
+# What is a fire worth
+# when it almost
+# never happens?
 
 Machine learning · Agriculture
 
@@ -22,51 +21,63 @@ France · 9 anonymised exercise years
 
 <!-- _class: split -->
 
-<!-- ![bg left:46%](../../pictures/presentations/photos/motivation.png) -->
+![bg left:46%](../../pictures/presentations/photos/motivation-serre.jpg)
 
-# [Why this
-# matters now.]
+# A fire stops
+# the farm.
 
-[Human or economic stake, in one sentence.]
+Fire is a large share of what the multi-risk policy pays out.
 
-**[What happens if nobody acts.]**
+**Miss the premium, and both the insurer and the farmer plan on the wrong number.**
 
 ---
 
 <!-- _class: split -->
 
-<!-- ![bg left:46%](../../pictures/presentations/photos/hero.png) -->
+![bg left:46%](../../pictures/presentations/photos/physique-grange.jpg)
 
-# [Who would
-# use this.]
+# Pacifica sets
+# the premium.
 
-[Agency / public body]. [Firm / operator]. [Other actor].
+The farmer covers the business, the buildings, the equipment.
 
-**[The decision they have to make.]**
+**The decision: what fire cost to expect on this contract, this year.**
 
 ---
 
 <!-- _class: full -->
 
-<!-- ![bg brightness:0.38](../../pictures/presentations/photos/physique.png) -->
+![bg brightness:0.38](../../pictures/presentations/photos/physique-grange.jpg)
 
-# [The physics
-# in plain words.]
+# Fire starts
+# in the buildings.
 
-[Real-world mechanism, no equation: too much rain, too much heat, an evening gap…]
+Timber, stored feed, machinery. Work stops until they are rebuilt.
 
 ---
 
 <!-- _class: split -->
 
-<!-- ![bg left:46%](../../pictures/presentations/photos/motivation.png) -->
+![bg left:46%](../../pictures/presentations/photos/couverture-champs.jpg)
 
-# [How we read
-# the numbers.]
+# One row is one
+# contract, one year.
 
-Where they come from. At what grain.
+383,610 contracts. Nine anonymised years, and no calendar.
 
-What we transform so the figure actually means something.
+**The cost on the row is zero almost everywhere. An average hides that.**
+
+---
+
+<!-- _class: full -->
+
+![bg brightness:0.38](../../pictures/presentations/photos/couverture-champs.jpg)
+
+# More than half
+# the contracts cover
+# only part of the year.
+
+45% cover one full year. Almost none run past two.
 
 ---
 
@@ -74,62 +85,64 @@ What we transform so the figure actually means something.
 
 # This project is not.
 
-Not [non-goal 1].
+Not a prevention audit.
 
-Not [non-goal 2].
+Not the commercial price, loadings and margin included.
 
-**[What we aim at instead.]**
+**The pure premium: the fire cost one can expect.**
 
 ---
 
 <!-- _class: full -->
 
-<!-- ![bg brightness:0.38](../../pictures/presentations/photos/physique.png) -->
+![bg brightness:0.38](../../pictures/presentations/photos/physique-grange.jpg)
 
-# [Punchline.]
-# [One number.]
+# 99.25%
+# of contracts
+# have no fire claim.
 
 ---
 
 <!-- _class: chart -->
 
-[Sentence headline: the chart *this* audience should remember.]
+## About one claim in a hundred contracts, or in two hundred.
 
-<!-- ![w:980](../../pictures/presentations/key-chart-en.png) -->
+It depends on the year label. Fire does not become common.
+
+![w:980](../../pictures/presentations/part-sinistre-annee-en.png)
 
 ---
 
-<!-- _class: split -->
+<!-- _class: chart -->
 
-<!-- ![bg left:40%](../../pictures/presentations/photos/hero.png) -->
+## Four contracts are not a region.
 
-# [This is not
-# an artefact.]
+93 zones. Grey means fewer than 500 contracts: that rate is not a map of where fire starts.
 
-<!-- ![w:480](../../pictures/presentations/map-or-robustness-en.png) -->
+![w:980](../../pictures/presentations/zones-en.png)
 
 ---
 
 <!-- _class: actions -->
 
-<!-- ![bg right:38%](../../pictures/presentations/photos/action.png) -->
+![bg right:38%](../../pictures/presentations/photos/physique-grange.jpg)
 
 # Monday.
 
-**[Target A]** — [concrete move].
+**Pricing** — separate "will there be a fire?" from "if there is one, what does it cost?"
 
-**[Target B]** — [concrete move].
+**Data** — a surface written twice is still one surface.
 
-Not causation. A bundle of clues.
+An expected cost, read from what we actually see.
 
 ---
 
 <!-- _class: cta -->
 
-<!-- ![bg brightness:0.30](../../pictures/presentations/photos/cta.png) -->
+![bg brightness:0.30](../../pictures/presentations/photos/couverture-champs.jpg)
 
-# Your turn.
+# The detail is in the code.
 
-[Open the dashboard](../explore-en.html)
+[Source repository](https://github.com/dimiphoton/ML-zoom-camp-midterm-project)
 
-[Source code](https://github.com/dimiphoton/mon-projet)
+The premium model comes next.

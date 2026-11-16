@@ -7,11 +7,11 @@ paginate: true
 <!-- _class: cover -->
 <!-- _paginate: false -->
 
-<!-- Photo: pictures/presentations/photos/hero.png -->
-<!-- ![bg brightness:0.40](../../pictures/presentations/photos/hero.png) -->
+![bg brightness:0.40](../../pictures/presentations/photos/physique-grange.jpg)
 
-# [Research question]
-# as one assertion
+# Where is the signal
+# when 99% of the rows
+# are zero?
 
 Machine learning · Agriculture · Python / scikit-learn / XGBoost / Flask
 
@@ -21,62 +21,64 @@ France · 9 anonymised exercise years · 1 row = 1 contract × 1 exercise year
 
 <!-- _class: split -->
 
-<!-- ![bg left:46%](../../pictures/presentations/photos/motivation.png) -->
+![bg left:46%](../../pictures/presentations/photos/couverture-champs.jpg)
 
-# [Why measure
-# this.]
+# Predicting zero everywhere
+# already scores RMSE 6,803.
 
-[Quantified stake if we have it. Cost of a bad call.]
+99.25% of the 383,610 rows have `FREQ` = 0. Fire is still the main slice of the multi-risk claims cost.
 
-**[What is missing today to decide.]**
+**The floor is high because the mass is zero.**
 
 ---
 
 <!-- _class: split -->
 
-<!-- ![bg left:46%](../../pictures/presentations/photos/hero.png) -->
+![bg left:46%](../../pictures/presentations/photos/motivation-serre.jpg)
 
-# [Who consumes
-# the output.]
+# Pacifica turns that
+# into a pure premium.
 
-[Agency / regulator]. [Operator / insurer / consultancy].
+Poisson frequency, Tweedie severity, log link. The score is on `CHARGE`, after the two pieces are combined.
 
-The deliverable: [indicator, view, recommendation], not a report.
+**The decision is the expected fire cost on the contract-year.**
 
 ---
 
 <!-- _class: full -->
 
-<!-- ![bg brightness:0.38](../../pictures/presentations/photos/physique.png) -->
+![bg brightness:0.38](../../pictures/presentations/photos/physique-grange.jpg)
 
-# [Mechanism.]
+# Claim cost equals frequency
+# times severity times exposure.
 
-[Physics or process: rain → waterlogged → yield, load curve, Espec…]
-
----
-
-<!-- _class: split -->
-
-<!-- ![bg left:46%](../../pictures/presentations/photos/motivation.png) -->
-
-# [Data-processing
-# logic.]
-
-Sources. Grain. Units. Joins.
-
-What we aggregate, what we refuse to mix.
+A fire in a farm building is rare. Working hypothesis: the signal is which contract has a claim, more than which year label it sits in.
 
 ---
 
 <!-- _class: split -->
 
-<!-- ![bg left:46%](../../pictures/presentations/photos/physique.png) -->
+![bg left:46%](../../pictures/presentations/photos/motivation-serre.jpg)
 
-# [What we isolate.]
+# Features and targets
+# join on `ID`.
 
-Strip out [confounder]. What remains is [target].
+383,610 × 374 in. Targets live apart: `FREQ`, `CM`, `ANNEE_ASSURANCE`, `CHARGE`. The test file has the same columns and no targets.
 
-Not [what we are not claiming].
+**A claim count and an amount in euros do not belong in the same model.**
+
+---
+
+<!-- _class: split -->
+
+![bg left:46%](../../pictures/presentations/photos/couverture-champs.jpg)
+
+# Exposure sits inside
+# the definition.
+
+`ANNEE_ASSURANCE` runs from 0.003 to 2 years. Median 0.88. It enters `CHARGE` by formula. Both files carry the same values.
+
+**A copied column inflates a model and adds no fact.**
 
 ---
 
@@ -84,54 +86,84 @@ Not [what we are not claiming].
 
 # Scope.
 
-We do [orientation: diagnosis / identifiability / decision].
+We estimate the fire pure premium.
 
-We are not [2050 scenario / flashy model / a map with no GIS].
+The commercial tariff, prevention, and the other covers on the policy stay out.
 
 ---
 
 <!-- _class: chart -->
 
-[Baseline / trend / raw data — sentence headline.]
+## Exposure often stops short of a year.
 
-<!-- ![w:920](../../pictures/presentations/baseline-en.png) -->
+54.7% under one year. 44.6% exactly at 1. 0.7% between 1 and 2.
+
+![w:980](../../pictures/presentations/exposition-en.png)
 
 ---
 
 <!-- _class: full -->
 
-<!-- ![bg brightness:0.38](../../pictures/presentations/photos/physique.png) -->
+![bg brightness:0.38](../../pictures/presentations/photos/physique-grange.jpg)
 
-# [Main result]
-# [metric + n]
+# 2,894 contracts
+# have at least one claim.
+
+Out of 383,610. 536 of those claims have a zero cost. Six average costs are negative.
 
 ---
 
 <!-- _class: chart -->
 
-[Chart for *this* technical story — not necessarily the recruiter one.]
+## The weather sum repeats the mean's rank.
 
-<!-- ![w:980](../../pictures/presentations/key-chart-en.png) -->
+Thirty indicators out of thirty. The maximum moves with the mean, and is not the same column.
+
+![w:980](../../pictures/presentations/meteo-rangs-en.png)
 
 ---
 
 <!-- _class: split -->
 
-<!-- ![bg left:40%](../../pictures/presentations/photos/hero.png) -->
+![bg left:40%](../../pictures/presentations/photos/motivation-serre.jpg)
 
-# [Robustness.]
+# Two columns,
+# one measurement.
 
-[Spatial / years / n]. [What is not independent.]
+`SURFACE1` and `SURFACE2` differ on 5 contracts. `SURFACE4` and `SURFACE6` match wherever both are filled.
 
-<!-- ![w:480](../../pictures/presentations/map-or-robustness-en.png) -->
+**`KAPITAL10` copies `KAPITAL11`, and is 0 where `KAPITAL11` is blank. `KAPITAL1` only flags `KAPITAL13`.**
 
 ---
 
 <!-- _class: chart -->
 
-Why not [flashy model]? n = […]. [Chosen model + validation.]
+## Headcount runs from 27,000 to 78,000.
 
-<!-- ![w:640](../../pictures/presentations/validation-en.png) -->
+The claim rate roughly doubles, and stays near 1%.
+
+![w:980](../../pictures/presentations/volume-annees-en.png)
+
+---
+
+<!-- _class: chart -->
+
+## Past 1,000 contracts, the rate spans a factor of six.
+
+93 zones. Grey means fewer than 500 contracts. Three zones have fewer than 100.
+
+![w:920](../../pictures/presentations/zones-en.png)
+
+---
+
+<!-- _class: dark -->
+
+# A sharp-looking model
+# can get away with zero.
+
+Severity has 2,894 contracts to learn from. Nothing is fit at this step.
+
+**What comes next has to beat an RMSE of 6,803.**
 
 ---
 
@@ -139,24 +171,25 @@ Why not [flashy model]? n = […]. [Chosen model + validation.]
 
 # Where it breaks.
 
-[Limit 1.]
+The year labels have no date. There is no client id.
 
-[Limit 2.]
-
-[Limit 3. Correlation ≠ causation if relevant.]
+Station weather is missing on about 57% of rows. Three zones have fewer than 100 contracts.
 
 ---
 
 <!-- _class: cta -->
 
-<!-- ![bg brightness:0.30](../../pictures/presentations/photos/cta.png) -->
+![bg brightness:0.30](../../pictures/presentations/photos/couverture-champs.jpg)
 
 # Reproduce.
 
-[Explore online](../explore-en.html)
+`pytest`
 
-`python -m mon_projet run`
+`notebooks/eda.ipynb`
 
-`python -m mon_projet dashboard`
+[Code](https://github.com/dimiphoton/ML-zoom-camp-midterm-project)
 
-<!-- Stack badges here, not on the recruiter cover. -->
+![w:148](https://img.shields.io/badge/Python-3.11-3776AB?logo=python&logoColor=white)
+![w:168](https://img.shields.io/badge/scikit--learn-F7931E?logo=scikitlearn&logoColor=white)
+![w:140](https://img.shields.io/badge/XGBoost-337AB7?logo=xgboost&logoColor=white)
+![w:110](https://img.shields.io/badge/Flask-000000?logo=flask&logoColor=white)

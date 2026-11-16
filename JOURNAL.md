@@ -40,3 +40,16 @@
   (58 entiers, 36 flottants, 280 textes), quatre colonnes sans libellé
   (`ADOSS`, `DUREE_REQANEUF`, `ID`, `NBJFXI3S10_MM_A`), `ESPINSEE`
   manquant à 39,5 % sur le train.
+
+## 2026-11-16 — Phase 4 : exploration
+
+- `notebooks/eda.ipynb` appelle `agri_fire.eda`. 99,25 % des contrats
+  sans sinistre. Exposition médiane 0,88 an, 54,7 % en dessous d'un an.
+  Neuf millésimes, taux de sinistre entre 0,49 % et 1,08 %. 93 zones,
+  trois en ont moins de 100.
+- Colonnes redondantes : `SURFACE1` ≈ `SURFACE2` (5 écarts),
+  `SURFACE4` = `SURFACE6`, `KAPITAL10` recopie `KAPITAL11`, la somme
+  météo a le même rang que la moyenne sur 30 grandeurs. Aucune colonne
+  n'est retirée à ce stade.
+- Première version des 4 présentations : cadrage du problème, questions
+  de couverture encore ouvertes. Graphes dans `pictures/presentations/`.

@@ -13,7 +13,7 @@ colonnes, sans cibles. Données locales dans `data/raw/`, non versionnées.
 - [x] Phase 1 — Décrire le problème dans le README (contexte, usage, métrique, données locales)
 - [x] Phase 2 — Renommer le package `agri_fire`, déclarer les dépendances validées, documenter le venv
 - [x] Phase 3 — Rapport testé : grain, manquants, formule de la charge
-- [ ] Phase 4 — EDA (zéros, exposition, années, zones, blocs redondants) et première version des 4 présentations
+- [x] Phase 4 — EDA (zéros, exposition, années, zones, blocs redondants) et première version des 4 présentations
 - [ ] Phase 5 — Baseline Poisson (fréquence) + Tweedie (coût moyen), RMSE sur un jeu tenu à part
 - [ ] Phase 6 — Modèles linéaire et arbres, réglage, choix documenté, présentations du résultat
 - [ ] Phase 7 — `train.py` entraîne le modèle retenu et le sauvegarde

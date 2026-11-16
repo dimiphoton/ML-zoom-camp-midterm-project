@@ -7,11 +7,11 @@ paginate: true
 <!-- _class: cover -->
 <!-- _paginate: false -->
 
-<!-- Photo : pictures/presentations/photos/hero.png -->
-<!-- ![bg brightness:0.40](../../pictures/presentations/photos/hero.png) -->
+![bg brightness:0.40](../../pictures/presentations/photos/physique-grange.jpg)
 
-# [Question de recherche]
-# en une assertion
+# Où est le signal
+# quand 99 % des lignes
+# valent zéro ?
 
 Machine learning · Agriculture · Python / scikit-learn / XGBoost / Flask
 
@@ -21,62 +21,64 @@ France · 9 exercices anonymisés · 1 ligne = 1 contrat × 1 exercice
 
 <!-- _class: split -->
 
-<!-- ![bg left:46%](../../pictures/presentations/photos/motivation.png) -->
+![bg left:46%](../../pictures/presentations/photos/couverture-champs.jpg)
 
-# [Pourquoi
-# mesurer ça.]
+# Prédire zéro partout
+# fait déjà 6 803 de RMSE.
 
-[Enjeu chiffré si on l'a. Coût d'une mauvaise décision.]
+99,25 % des 383 610 lignes ont `FREQ` = 0. L'incendie reste la part majeure de la charge du multirisque.
 
-**[Ce qui manque aujourd'hui pour trancher.]**
+**Le plancher est haut parce que la masse est nulle.**
 
 ---
 
 <!-- _class: split -->
 
-<!-- ![bg left:46%](../../pictures/presentations/photos/hero.png) -->
+![bg left:46%](../../pictures/presentations/photos/motivation-serre.jpg)
 
-# [Qui consomme
-# le résultat.]
+# Pacifica en fait
+# une prime pure.
 
-[Agence / régulateur]. [Opérateur / assureur / bureau d'études].
+Fréquence Poisson, coût moyen Tweedie, lien log. Le score porte sur `CHARGE`, une fois les deux morceaux réunis.
 
-Le livrable : [indicateur, vue, reco], pas un rapport.
+**La décision : le coût d'incendie attendu sur le contrat-exercice.**
 
 ---
 
 <!-- _class: full -->
 
-<!-- ![bg brightness:0.38](../../pictures/presentations/photos/physique.png) -->
+![bg brightness:0.38](../../pictures/presentations/photos/physique-grange.jpg)
 
-# [Mécanisme.]
+# Charge = fréquence
+# × coût × exposition.
 
-[Physique ou processus : pluie → saturé → rendement, courbe de charge, Espec…]
-
----
-
-<!-- _class: split -->
-
-<!-- ![bg left:46%](../../pictures/presentations/photos/motivation.png) -->
-
-# [Logique du
-# traitement.]
-
-Sources. Grain. Unités. Jointures.
-
-Ce qu'on agrège, ce qu'on ne mélange pas.
+Le feu sur un bâtiment d'exploitation est rare. Hypothèse : le signal est dans qui a un sinistre, plus que dans le millésime.
 
 ---
 
 <!-- _class: split -->
 
-<!-- ![bg left:46%](../../pictures/presentations/photos/physique.png) -->
+![bg left:46%](../../pictures/presentations/photos/motivation-serre.jpg)
 
-# [Ce qu'on isole.]
+# Variables et cibles
+# se joignent par `ID`.
 
-On retire [confondant]. Ce qui reste, c'est [cible].
+383 610 × 374 en entrée. Cibles à part : `FREQ`, `CM`, `ANNEE_ASSURANCE`, `CHARGE`. Le test a les mêmes colonnes, sans cibles.
 
-Pas [ce qu'on ne prétend pas].
+**On ne met pas un nombre de sinistres et un montant en euros dans le même modèle.**
+
+---
+
+<!-- _class: split -->
+
+![bg left:46%](../../pictures/presentations/photos/couverture-champs.jpg)
+
+# L'exposition est dans
+# la définition.
+
+`ANNEE_ASSURANCE` va de 0,003 à 2 ans. Médiane 0,88. Elle entre dans `CHARGE` par formule. Les deux fichiers la portent à l'identique.
+
+**Une colonne recopiée gonfle le modèle sans ajouter un fait.**
 
 ---
 
@@ -84,54 +86,84 @@ Pas [ce qu'on ne prétend pas].
 
 # Périmètre.
 
-On fait [orientation : diagnostic / identifiability / décision].
+On estime la prime pure incendie.
 
-On n'est pas [scénario 2050 / modèle tape-à-l'œil / carte sans fond].
+On laisse le tarif commercial, la prévention, et les autres garanties du contrat.
 
 ---
 
 <!-- _class: chart -->
 
-[Baseline / tendance / donnée brute — titre-phrase.]
+## L'exposition s'arrête souvent avant un an.
 
-<!-- ![w:920](../../pictures/presentations/baseline-fr.png) -->
+54,7 % sous un an. 44,6 % exactement à 1. 0,7 % entre 1 et 2.
+
+![w:980](../../pictures/presentations/exposition-fr.png)
 
 ---
 
 <!-- _class: full -->
 
-<!-- ![bg brightness:0.38](../../pictures/presentations/photos/physique.png) -->
+![bg brightness:0.38](../../pictures/presentations/photos/physique-grange.jpg)
 
-# [Résultat principal]
-# [métrique + n]
+# 2 894 contrats
+# ont au moins un sinistre.
+
+Sur 383 610. 536 de ces sinistres ont un coût nul. Six coûts moyens sont négatifs.
 
 ---
 
 <!-- _class: chart -->
 
-[Graphe de *ce* récit technique — pas forcément celui du deck RH.]
+## La somme météo a le même rang que la moyenne.
 
-<!-- ![w:980](../../pictures/presentations/graphique-cle-fr.png) -->
+Trente grandeurs sur trente. Le maximum suit, sans être la même colonne.
+
+![w:980](../../pictures/presentations/meteo-rangs-fr.png)
 
 ---
 
 <!-- _class: split -->
 
-<!-- ![bg left:40%](../../pictures/presentations/photos/hero.png) -->
+![bg left:40%](../../pictures/presentations/photos/motivation-serre.jpg)
 
-# [Robustesse.]
+# Deux colonnes,
+# une seule mesure.
 
-[Spatial / années / n]. [Ce qui n'est pas indépendant.]
+`SURFACE1` et `SURFACE2` diffèrent sur 5 contrats. `SURFACE4` et `SURFACE6` coïncident dès que les deux sont remplies.
 
-<!-- ![w:480](../../pictures/presentations/carte-ou-robustesse-fr.png) -->
+**`KAPITAL10` recopie `KAPITAL11`, et vaut 0 là où `KAPITAL11` est vide. `KAPITAL1` ne fait que signaler `KAPITAL13`.**
 
 ---
 
 <!-- _class: chart -->
 
-Pourquoi pas [modèle tape-à-l'œil] ? n = […]. [Modèle retenu + validation.]
+## L'effectif passe de 27 000 à 78 000.
 
-<!-- ![w:640](../../pictures/presentations/validation-fr.png) -->
+Le taux de sinistre va du simple au double, et reste autour de 1 %.
+
+![w:980](../../pictures/presentations/volume-annees-fr.png)
+
+---
+
+<!-- _class: chart -->
+
+## Au-delà de 1 000 contrats, le taux varie d'un facteur six.
+
+93 zones. En gris, moins de 500 contrats. Trois zones en ont moins de 100.
+
+![w:920](../../pictures/presentations/zones-fr.png)
+
+---
+
+<!-- _class: dark -->
+
+# Un modèle voyant
+# peut se contenter de zéro.
+
+Le coût s'apprend sur 2 894 contrats. Aucun modèle n'est ajusté ici.
+
+**La suite doit battre le RMSE de 6 803.**
 
 ---
 
@@ -139,24 +171,25 @@ Pourquoi pas [modèle tape-à-l'œil] ? n = […]. [Modèle retenu + validation.
 
 # Où ça casse.
 
-[Limite 1.]
+Les millésimes n'ont pas de date. Pas d'identifiant client.
 
-[Limite 2.]
-
-[Limite 3. Corrélation ≠ cause si pertinent.]
+La météo de station manque sur environ 57 % des lignes. Trois zones ont moins de 100 contrats.
 
 ---
 
 <!-- _class: cta -->
 
-<!-- ![bg brightness:0.30](../../pictures/presentations/photos/cta.png) -->
+![bg brightness:0.30](../../pictures/presentations/photos/couverture-champs.jpg)
 
 # Reproduire.
 
-[Explorer en ligne](../explore-fr.html)
+`pytest`
 
-`python -m mon_projet run`
+`notebooks/eda.ipynb`
 
-`python -m mon_projet dashboard`
+[Code](https://github.com/dimiphoton/ML-zoom-camp-midterm-project)
 
-<!-- Badges de stack ici, pas en slide 1 recruteur. -->
+![w:148](https://img.shields.io/badge/Python-3.11-3776AB?logo=python&logoColor=white)
+![w:168](https://img.shields.io/badge/scikit--learn-F7931E?logo=scikitlearn&logoColor=white)
+![w:140](https://img.shields.io/badge/XGBoost-337AB7?logo=xgboost&logoColor=white)
+![w:110](https://img.shields.io/badge/Flask-000000?logo=flask&logoColor=white)

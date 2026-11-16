@@ -7,12 +7,11 @@ paginate: true
 <!-- _class: cover -->
 <!-- _paginate: false -->
 
-<!-- Photo : pictures/presentations/photos/hero.png -->
-<!-- ![bg brightness:0.40](../../pictures/presentations/photos/hero.png) -->
+![bg brightness:0.40](../../pictures/presentations/photos/couverture-champs.jpg)
 
-# [Question humaine]
-# sur deux ou trois
-# lignes ?
+# Combien vaut un incendie
+# qui n'arrive presque
+# jamais ?
 
 Machine learning · Agriculture
 
@@ -22,51 +21,63 @@ France · 9 exercices anonymisés
 
 <!-- _class: split -->
 
-<!-- ![bg left:46%](../../pictures/presentations/photos/motivation.png) -->
+![bg left:46%](../../pictures/presentations/photos/motivation-serre.jpg)
 
-# [Pourquoi
-# maintenant.]
+# Un feu arrête
+# l'exploitation.
 
-[Enjeu humain ou économique, en une phrase.]
+L'incendie pèse lourd dans ce que coûte le multirisque agricole.
 
-**[Ce qui se joue si on ne fait rien.]**
+**Une prime à côté, et l'assureur comme l'exploitant se trompent de chiffre.**
 
 ---
 
 <!-- _class: split -->
 
-<!-- ![bg left:46%](../../pictures/presentations/photos/hero.png) -->
+![bg left:46%](../../pictures/presentations/photos/physique-grange.jpg)
 
-# [Qui doit
-# s'en servir.]
+# Pacifica fixe
+# la prime.
 
-[Agence / administration]. [Entreprise / opérateur]. [Autre acteur].
+L'agriculteur couvre l'activité, les bâtiments, le matériel.
 
-**[La décision qu'ils ont à prendre.]**
+**La décision : quel coût d'incendie attendre sur ce contrat, cette année.**
 
 ---
 
 <!-- _class: full -->
 
-<!-- ![bg brightness:0.38](../../pictures/presentations/photos/physique.png) -->
+![bg brightness:0.38](../../pictures/presentations/photos/physique-grange.jpg)
 
-# [La physique
-# en clair.]
+# Le feu prend
+# dans le bâti.
 
-[Mécanisme réel, sans équation : trop d'eau, trop de chaleur, un trou le soir…]
+Bois, fourrage, matériel stocké. L'activité s'arrête le temps de reconstruire.
 
 ---
 
 <!-- _class: split -->
 
-<!-- ![bg left:46%](../../pictures/presentations/photos/motivation.png) -->
+![bg left:46%](../../pictures/presentations/photos/couverture-champs.jpg)
 
-# [Comment on
-# lit les chiffres.]
+# Une ligne,
+# un contrat, un an.
 
-D'où ça vient. À quelle maille.
+383 610 contrats. Neuf millésimes anonymes, sans calendrier.
 
-Ce qu'on transforme pour que le chiffre veuille dire quelque chose.
+**Le coût affiché est nul presque partout. Une moyenne le cache.**
+
+---
+
+<!-- _class: full -->
+
+![bg brightness:0.38](../../pictures/presentations/photos/couverture-champs.jpg)
+
+# Plus d'un contrat
+# sur deux ne couvre
+# qu'une partie de l'année.
+
+45 % couvrent un an pile. Presque aucun ne va au-delà de deux ans.
 
 ---
 
@@ -74,62 +85,64 @@ Ce qu'on transforme pour que le chiffre veuille dire quelque chose.
 
 # Ce projet, ce n'est pas.
 
-Pas [non-objectif 1].
+Pas un audit de prévention.
 
-Pas [non-objectif 2].
+Pas le prix commercial, charges et marge comprises.
 
-**[Ce qu'on vise à la place.]**
+**La prime pure : le coût d'incendie que l'on peut attendre.**
 
 ---
 
 <!-- _class: full -->
 
-<!-- ![bg brightness:0.38](../../pictures/presentations/photos/physique.png) -->
+![bg brightness:0.38](../../pictures/presentations/photos/physique-grange.jpg)
 
-# [Punchline.]
-# [Un chiffre.]
+# 99,25 %
+# des contrats
+# n'ont aucun sinistre.
 
 ---
 
 <!-- _class: chart -->
 
-[Titre-phrase : le graphe que *ce* public doit retenir.]
+## Environ un contrat sinistré sur cent, ou sur deux cents.
 
-<!-- ![w:980](../../pictures/presentations/graphique-cle-fr.png) -->
+Selon le millésime. Le feu ne devient pas courant.
+
+![w:980](../../pictures/presentations/part-sinistre-annee-fr.png)
 
 ---
 
-<!-- _class: split -->
+<!-- _class: chart -->
 
-<!-- ![bg left:40%](../../pictures/presentations/photos/hero.png) -->
+## Quatre contrats ne font pas un territoire.
 
-# [Ce n'est pas
-# un artefact.]
+93 zones. En gris, moins de 500 contrats : leur taux ne dit pas où le feu prend.
 
-<!-- ![w:480](../../pictures/presentations/carte-ou-robustesse-fr.png) -->
+![w:980](../../pictures/presentations/zones-fr.png)
 
 ---
 
 <!-- _class: actions -->
 
-<!-- ![bg right:38%](../../pictures/presentations/photos/action.png) -->
+![bg right:38%](../../pictures/presentations/photos/physique-grange.jpg)
 
 # Lundi.
 
-**[Cible A]** — [geste concret].
+**Tarification** — séparer « y aura-t-il un feu ? » et « s'il y en a un, combien ? ».
 
-**[Cible B]** — [geste concret].
+**Données** — une surface écrite deux fois reste une seule surface.
 
-Pas une cause unique. Un faisceau d'indices.
+Un coût attendu, à partir de ce qu'on observe.
 
 ---
 
 <!-- _class: cta -->
 
-<!-- ![bg brightness:0.30](../../pictures/presentations/photos/cta.png) -->
+![bg brightness:0.30](../../pictures/presentations/photos/couverture-champs.jpg)
 
-# À vous.
+# Le détail est dans le code.
 
-[Ouvrir le tableau de bord](../explore-fr.html)
+[Dépôt GitHub](https://github.com/dimiphoton/ML-zoom-camp-midterm-project)
 
-[Code source](https://github.com/dimiphoton/mon-projet)
+Le modèle de prime vient ensuite.
