@@ -1,0 +1,15 @@
+.git
+.cursor
+.venv
+venv
+data
+tests
+notebooks
+experiments
+docs
+pictures
+brief
+**/__pycache__
+**/*.pyc
+.pytest_cache
+*.egg-info
