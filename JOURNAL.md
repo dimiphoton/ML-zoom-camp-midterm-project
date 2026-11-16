@@ -20,3 +20,11 @@
   RMSE sur `CHARGE`, plancher « prédire 0 » ≈ 6 803 sur le train, quatre CSV
   à déposer dans `data/raw/` (non versionnés).
 - Bandeau Role / Domain / Stack inchangé.
+
+## 2026-11-16 — Phase 2 : environnement
+
+- Package `src/mon_projet` renommé `src/agri_fire`. Les tests importent
+  `agri_fire` et `agri_fire.cli`.
+- `pyproject.toml` déclare uniquement pandas, numpy, scikit-learn,
+  xgboost, flask, matplotlib et pytest. Installés dans `.venv`.
+- README : création du venv, activation (PowerShell et bash), `pytest`.

@@ -56,13 +56,33 @@ No model is selected yet. The training-set floor is an RMSE of about 6,803, from
 
 ## Reproduce
 
-Training and the prediction service follow the later steps in `ROADMAP.md`. The data step for those steps is the table above: the four CSV files in `data/raw/`.
+Python 3.11 or newer. From the repository root, create a virtual environment, activate it, install the declared dependencies, and run the tests.
+
+Windows (PowerShell):
+
+```powershell
+python -m venv .venv
+.venv\Scripts\Activate.ps1
+python -m pip install -e .
+pytest
+```
+
+macOS and Linux:
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+python -m pip install -e .
+pytest
+```
+
+`pip install -e .` reads `pyproject.toml` and installs pandas, numpy, scikit-learn, xgboost, flask, matplotlib, and pytest. Training and the prediction service follow the later steps in `ROADMAP.md`. The data step for those steps is the table above: the four CSV files in `data/raw/`.
 
 ## Repo structure
 
 - `data/raw/` — the four local CSV files, not versioned
 - `experiments/` — variable dictionary and example notebook
-- `src/mon_projet/` — Python package
+- `src/agri_fire/` — Python package
 - `docs/decisions.md` — metric, split, and stack already chosen
 - `docs/presentations/` — slide sources
 - `ROADMAP.md`, `JOURNAL.md` — plan and development log, in French
