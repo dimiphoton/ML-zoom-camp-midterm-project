@@ -28,3 +28,15 @@
 - `pyproject.toml` déclare uniquement pandas, numpy, scikit-learn,
   xgboost, flask, matplotlib et pytest. Installés dans `.venv`.
 - README : création du venv, activation (PowerShell et bash), `pytest`.
+
+## 2026-11-16 — Phase 3 : contrôle des données
+
+- `check_train` charge le train et vérifie 383 610 lignes, l'unicité de
+  `ID`, `CHARGE` = `FREQ` × `CM` × `ANNEE_ASSURANCE` (tolérance 1e-6),
+  un nombre de sinistres entier, et les mêmes colonnes que le test.
+- Les tests unitaires tournent sur un petit CSV fabriqué. Les 697 Mo
+  ne sont pas lus par pytest.
+- `docs/qualite-donnees.md` : 278 colonnes avec manquants, types
+  (58 entiers, 36 flottants, 280 textes), quatre colonnes sans libellé
+  (`ADOSS`, `DUREE_REQANEUF`, `ID`, `NBJFXI3S10_MM_A`), `ESPINSEE`
+  manquant à 39,5 % sur le train.

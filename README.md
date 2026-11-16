@@ -84,6 +84,7 @@ pytest
 - `experiments/` — variable dictionary and example notebook
 - `src/agri_fire/` — Python package
 - `docs/decisions.md` — metric, split, and stack already chosen
+- `docs/qualite-donnees.md` — row count, missing values, charge formula
 - `docs/presentations/` — slide sources
 - `ROADMAP.md`, `JOURNAL.md` — plan and development log, in French
 
