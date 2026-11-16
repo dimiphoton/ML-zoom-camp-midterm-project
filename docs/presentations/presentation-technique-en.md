@@ -161,9 +161,9 @@ The claim rate roughly doubles, and stays near 1%.
 # A sharp-looking model
 # can get away with zero.
 
-Severity has 2,894 contracts to learn from. Nothing is fit at this step.
+Poisson and Tweedie baseline, one fifth of train held out. RMSE 7,047. Predict 0: 7,045.
 
-**What comes next has to beat an RMSE of 6,803.**
+**It does not beat that floor.**
 
 ---
 

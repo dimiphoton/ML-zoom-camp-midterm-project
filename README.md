@@ -52,7 +52,13 @@ Column labels are in `experiments/Descriptif_données.xlsx`. The challenge noteb
 
 ## Result
 
-No model is selected yet. The training-set floor is an RMSE of about 6,803, from predicting zero charge on every contract.
+No model is selected yet. A first baseline is scored on a 20% row hold-out of the training set (seed 42, 76,722 contracts). The official test file is not used for that score.
+
+The baseline is a scikit-learn Poisson GLM for `FREQ`, fit on every training row of the split, and a Tweedie GLM (power 1.5, log link) for `CM`, fit only on rows with at least one claim and a non-negative cost. Predicted `CHARGE` = predicted frequency × predicted average cost × `ANNEE_ASSURANCE`.
+
+The inputs are activity, vocation, zone, exposure, and three aggregates: surface (duplicate surface columns are not added twice), insured capital, and a count of capital flags.
+
+On the hold-out, the baseline RMSE is **7,047.10**. Predicting 0 on the same rows scores **7,045.28**. This baseline does not beat that floor.
 
 ## What the training rows show
 
@@ -81,6 +87,17 @@ pytest
 ```
 
 `pip install -e .` reads `pyproject.toml` and installs pandas, numpy, scikit-learn, xgboost, flask, matplotlib, and pytest. Training and the prediction service follow the later steps in `ROADMAP.md`. The data step for those steps is the table above: the four CSV files in `data/raw/`.
+
+The baseline score is recomputed from the two training files only:
+
+```python
+from agri_fire.models.baseline import evaluate_training_files
+
+evaluate_training_files(
+    "data/raw/train_input_Z61KlZo.csv",
+    "data/raw/train_output_DzPxaPY.csv",
+)
+```
 
 ## Repo structure
 

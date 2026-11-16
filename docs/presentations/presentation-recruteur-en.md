@@ -145,4 +145,4 @@ An expected cost, read from what we actually see.
 
 [Source repository](https://github.com/dimiphoton/ML-zoom-camp-midterm-project)
 
-The premium model comes next.
+A first estimate, on contracts kept aside, does no better than expecting no fire.

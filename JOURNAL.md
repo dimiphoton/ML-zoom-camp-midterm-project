@@ -53,3 +53,16 @@
   n'est retirée à ce stade.
 - Première version des 4 présentations : cadrage du problème, questions
   de couverture encore ouvertes. Graphes dans `pictures/presentations/`.
+
+## 2026-11-16 — Phase 5 : baseline
+
+- Poisson scikit-learn sur toutes les lignes d'un split aléatoire (graine 42,
+  20 % tenus à part). Tweedie `power` 1,5 sur les sinistres à coût positif
+  ou nul. Charge prédite = fréquence × coût × exposition.
+- Jeu court : activité, vocation, zone, exposition, surfaces agrégées hors
+  copies, capitaux en montant, indicateurs de capital. Pas les 374 colonnes.
+- Hold-out de 76 722 lignes. RMSE 7 047,10, contre 7 045,28 en prédisant 0.
+  La baseline ne bat pas ce plancher. Quatre des six coûts négatifs sortent
+  de l'apprentissage du coût ; les deux autres restent dans le RMSE.
+- Le test officiel (95 852 lignes) n'est pas lu. Les présentations ne font
+  qu'enregistrer ce constat : le récit du résultat est pour la phase 6.
